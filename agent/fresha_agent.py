@@ -5,6 +5,7 @@ from datetime import datetime
 from pathlib import Path
 
 from browser_use import Agent
+from browser_use.browser.browser import Browser, BrowserConfig
 from langchain_anthropic import ChatAnthropic
 from dotenv import load_dotenv
 
@@ -50,6 +51,12 @@ async def run():
         stop=None,
     )
 
+    browser = Browser(
+        config=BrowserConfig(
+            headless=True,
+        )
+    )
+
     task = f"""
 You are extracting business data from Fresha, a salon/barbershop management platform.
 
@@ -78,6 +85,7 @@ Important:
     agent = Agent(
         task=task,
         llm=llm,
+        browser=browser,
     )
 
     print(f"[{datetime.now()}] Starting Fresha agent...")
@@ -119,6 +127,8 @@ Important:
 
     print(f"[{datetime.now()}] Data saved to {output_file}")
     print(json.dumps(data, indent=2))
+
+    await browser.close()
 
 
 if __name__ == "__main__":
