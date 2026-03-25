@@ -38,7 +38,7 @@ async def download_csv(email, password):
 
             # Step 3: Click Continue
             print("Clicking Continue...")
-            await page.click('[data-qa="continue"]')
+            await page.click('[data-qa="continue"]', force=True)
             await page.wait_for_load_state("networkidle")
             await page.wait_for_timeout(3000)
 
