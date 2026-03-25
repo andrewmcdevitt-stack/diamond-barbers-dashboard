@@ -28,6 +28,14 @@ async def download_csv(email, password):
             await page.goto("https://partners.fresha.com/users/sign-in", wait_until="networkidle")
             await page.wait_for_timeout(3000)
 
+            # Dismiss cookie banner if it appears
+            try:
+            await page.get_by_role("button", name="Accept all").click(timeout=5000)
+            print("Dismissed cookie banner.")
+            await page.wait_for_timeout(1000)
+            except Exception:
+            print("No cookie banner found, continuing.")
+
             print("Entering email...")
             email_field = page.locator('input[placeholder="Enter your email address"]')
             await email_field.wait_for(timeout=10000)
