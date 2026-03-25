@@ -28,6 +28,7 @@ async def download_csv(email, password):
             await page.goto("https://partners.fresha.com/users/sign-in", wait_until="networkidle")
             await page.wait_for_timeout(3000)
 
+            # Dismiss cookie banner if it appears
             try:
                 await page.get_by_role("button", name="Accept all").click(timeout=5000)
                 print("Dismissed cookie banner.")
@@ -38,23 +39,27 @@ async def download_csv(email, password):
             print("Entering email...")
             email_field = page.locator('input[placeholder="Enter your email address"]')
             await email_field.wait_for(timeout=10000)
-            await email_field.click()
-            await page.keyboard.type(email, delay=50)
+            await email_field.fill(email)
             await page.wait_for_timeout(1000)
+            await page.screenshot(path=str(DATA_DIR / "after_email.png"))
+            print(f"Email typed. Field value: {await email_field.input_value()}")
 
             print("Clicking Continue...")
             await page.click('[data-qa="continue"]', force=True)
-            await page.wait_for_load_state("networkidle")
-            await page.wait_for_timeout(3000)
+            # Wait specifically for the password field to appear (proves page transitioned)
+            await page.wait_for_selector('input[type="password"]:not([tabindex="-1"])', timeout=15000)
+            await page.wait_for_timeout(1000)
+            print("Password page loaded.")
 
             print("Entering password...")
-            pwd_field = page.locator('input[type="password"]')
+            # Exclude the hidden off-screen field (tabindex=-1) and target the visible one
+            pwd_field = page.locator('input[type="password"]:not([tabindex="-1"])')
             await pwd_field.wait_for(timeout=10000)
-            await pwd_field.click(force=True)
-            await page.keyboard.type(password, delay=50)
+            await pwd_field.fill(password)
             await page.wait_for_timeout(1000)
 
             print("Submitting login form...")
+            # Try clicking the submit button first, fall back to Enter
             try:
                 await page.locator('button[type="submit"]').click(force=True, timeout=5000)
             except Exception:
@@ -63,6 +68,7 @@ async def download_csv(email, password):
                 except Exception:
                     await page.keyboard.press("Enter")
 
+            # Wait for the URL to change away from the sign-in page (up to 15 seconds)
             try:
                 await page.wait_for_url(lambda url: "sign-in" not in url, timeout=15000)
             except Exception:
@@ -70,19 +76,28 @@ async def download_csv(email, password):
 
             await page.wait_for_timeout(3000)
             print(f"After login. Current URL: {page.url}")
+
+            # Save a screenshot so we can see exactly what happened
             await page.screenshot(path=str(DATA_DIR / "after_login.png"))
 
+            # If still on sign-in page, login failed
             if "sign-in" in page.url:
                 raise Exception("Login failed — URL is still sign-in after waiting. Check credentials or screenshot.")
 
+            # Build the base URL (e.g. https://partners.fresha.com/en-AU/booking-partner/venues/12345)
+            # Reports URL is typically at /reports within the venue path
             current_url = page.url
-            print("Login succeeded. Navigating to Reports...")
+            print(f"Login succeeded. Navigating to Reports...")
 
+            # Try clicking Reports in the sidebar first
             try:
                 await page.get_by_text("Reports", exact=True).first.click(timeout=8000)
                 await page.wait_for_load_state("networkidle")
                 await page.wait_for_timeout(3000)
             except Exception:
+                # Fall back: navigate directly by appending /reports to the venue base URL
+                # The venue URL looks like: https://partners.fresha.com/.../venues/12345/...
+                # We want: https://partners.fresha.com/.../venues/12345/reports
                 if "/venues/" in current_url:
                     venue_part = current_url.split("/venues/")[1].split("/")[0]
                     base = current_url.split("/venues/")[0]
