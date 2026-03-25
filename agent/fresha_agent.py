@@ -53,7 +53,7 @@ async def run():
 
     browser = Browser(
         config=BrowserConfig(
-            headless=True,
+            headless=False,
         )
     )
 
