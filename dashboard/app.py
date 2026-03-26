@@ -311,13 +311,14 @@ body, p, span, div, label, td, th {{
 
 /* ── Selectbox ── */
 .stSelectbox {{ margin-top: 1rem !important; }}
-.stSelectbox [data-baseweb="select"] {{
+.stSelectbox [data-baseweb="select"],
+.stSelectbox [data-baseweb="select"] > div,
+.stSelectbox [data-baseweb="base-input"] {{
     background: {CARD} !important;
     border: 1px solid {BORDER} !important;
     border-radius: 20px !important;
-}}
-.stSelectbox [data-baseweb="select"] > div {{
-    background: {CARD} !important;
+    box-shadow: none !important;
+    outline: none !important;
 }}
 .stSelectbox [data-baseweb="select"] * {{ color: {TEXT} !important; }}
 .stSelectbox label {{ color: {MUTED} !important; font-size: 0.72rem !important; }}
@@ -339,6 +340,12 @@ body, p, span, div, label, td, th {{
 [data-testid="column"] {{ padding: 0 0.4rem !important; }}
 [data-testid="column"]:first-child {{ padding-left: 0 !important; }}
 [data-testid="column"]:last-child {{ padding-right: 0 !important; }}
+
+/* ── Equal-height KPI row ── */
+[data-testid="stHorizontalBlock"] {{ align-items: stretch !important; }}
+[data-testid="column"] > div[data-testid="stVerticalBlock"] {{ height: 100% !important; }}
+[data-testid="column"] > div[data-testid="stVerticalBlock"] > div {{ height: 100% !important; }}
+.kpi-card {{ height: 100% !important; box-sizing: border-box !important; }}
 
 /* ── Logo ── */
 [data-testid="stImage"] img {{ max-height: 192px; width: auto; }}
@@ -559,7 +566,7 @@ if occ_vals:
         paper_bgcolor=CARD,
         plot_bgcolor=CARD,
         font=dict(color=TEXT, size=11, family="sans-serif"),
-        height=max(320, len(occ_df) * 36 + 145),
+        height=max(280, len(occ_df) * 36 + 80),
         title=dict(
             text="Occupancy rate",
             font=dict(color=TEXT, size=14),
@@ -573,19 +580,10 @@ if occ_vals:
             zeroline=False, tickfont=dict(size=10),
         ),
         yaxis=dict(color=TEXT, tickfont=dict(size=11)),
-        margin=dict(l=20, r=20, t=45, b=100),
+        margin=dict(l=20, r=20, t=60, b=20),
         bargap=0.3,
         annotations=[
-            dict(xref="paper", yref="paper", x=0.0, y=-0.04,
-                 text=f"● On target (≥ 80%)", showarrow=False,
-                 font=dict(size=13, color=PURPLE), xanchor="left"),
-            dict(xref="paper", yref="paper", x=0.0, y=-0.08,
-                 text=f"● Needs attention (65–79%)", showarrow=False,
-                 font=dict(size=13, color=WARN_FG), xanchor="left"),
-            dict(xref="paper", yref="paper", x=0.0, y=-0.12,
-                 text=f"● Below target (< 65%)", showarrow=False,
-                 font=dict(size=13, color=RED_FG), xanchor="left"),
-            dict(xref="paper", yref="paper", x=0.99, y=1.04,
+            dict(xref="paper", yref="paper", x=0.99, y=1.08,
                  text=period_label, showarrow=False,
                  font=dict(size=11, color=MUTED), xanchor="right"),
         ],
