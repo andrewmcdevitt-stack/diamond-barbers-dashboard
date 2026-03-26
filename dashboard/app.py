@@ -38,11 +38,23 @@ st.markdown(f"""
 <style>
 /* ── Base ── */
 .stApp {{ background-color: {BG} !important; }}
-.main {{ background: transparent !important; }}
-[data-testid="stAppViewContainer"] {{ background: transparent !important; }}
-[data-testid="stAppViewBlockContainer"] {{ background: transparent !important; }}
-[data-testid="stVerticalBlock"] {{ background: transparent !important; }}
-[data-testid="stVerticalBlockBorderWrapper"] {{ background: transparent !important; }}
+.main,
+section.main,
+[data-testid="stMain"],
+[data-testid="stAppViewContainer"],
+[data-testid="stAppViewBlockContainer"],
+[data-testid="stMainBlockContainer"],
+[data-testid="stVerticalBlock"],
+[data-testid="stVerticalBlockBorderWrapper"] {{
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}}
+.main .block-container {{
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}}
 section[data-testid="stSidebar"] {{ display: none !important; }}
 #MainMenu, footer, header {{ visibility: hidden !important; }}
 * {{ box-sizing: border-box; margin: 0; padding: 0; }}
@@ -325,23 +337,23 @@ body, p, span, div, label, td, th {{
 
 /* ── Occupancy unified card (wraps title + chart + legend) ── */
 div[data-testid="stVerticalBlock"]:has(.occ-card-marker) {{
-    background: {CARD};
-    border: 1px solid {BORDER};
-    border-radius: 16px;
-    padding: 1.2rem 1rem 0.9rem;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    margin-bottom: 0.9rem;
+    background: {CARD} !important;
+    border: 1px solid {BORDER} !important;
+    border-radius: 16px !important;
+    padding: 1.2rem 1rem 0.9rem !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04) !important;
+    margin-bottom: 0.9rem !important;
 }}
 .occ-card-marker {{ display: none; }}
 
 /* ── Trend chart unified card (wraps title + chart) ── */
 div[data-testid="stVerticalBlock"]:has(.trend-card-marker) {{
-    background: {CARD};
-    border: 1px solid {BORDER};
-    border-radius: 16px;
-    padding: 1.2rem 1rem 0.9rem;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    margin-bottom: 0.9rem;
+    background: {CARD} !important;
+    border: 1px solid {BORDER} !important;
+    border-radius: 16px !important;
+    padding: 1.2rem 1rem 0.9rem !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04) !important;
+    margin-bottom: 0.9rem !important;
 }}
 .trend-card-marker {{ display: none; }}
 
