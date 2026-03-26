@@ -13,13 +13,13 @@ st.set_page_config(
 )
 
 # ── Fresha colour palette ──────────────────────────────────────────────────────
-BG       = "#F2F2F0"   # warm light grey page background (matches Fresha)
-CARD     = "#FFFFFF"   # white cards
-BORDER   = "#E8E8E6"   # subtle card border
-TEXT     = "#1A1A1A"   # near-black body text
-MUTED    = "#6B6B6B"   # muted grey
-PURPLE   = "#5B5BD6"   # Fresha purple accent (links, chart lines)
-PURPLE_L = "#9B9BE8"   # lighter purple (comparison lines / secondary)
+BG       = "#F2F2F0"
+CARD     = "#FFFFFF"
+BORDER   = "#E8E8E6"
+TEXT     = "#1A1A1A"
+MUTED    = "#6B6B6B"
+PURPLE   = "#5B5BD6"
+PURPLE_L = "#9B9BE8"
 GREEN_BG = "#DCFCE7"
 GREEN_FG = "#16A34A"
 RED_BG   = "#FEE2E2"
@@ -67,7 +67,7 @@ body, p, span, div, label, td, th {{
     color: {MUTED};
 }}
 
-/* ── Filter pill buttons (decorative, matching Fresha style) ── */
+/* ── Filter pill buttons ── */
 .db-filter-row {{
     display: flex;
     gap: 0.5rem;
@@ -128,7 +128,7 @@ body, p, span, div, label, td, th {{
     margin-bottom: 0.4rem;
 }}
 
-/* ── Change badge (green / red / grey / amber) ── */
+/* ── Change badge ── */
 .chg-pill {{
     display: inline-flex;
     align-items: center;
@@ -143,7 +143,7 @@ body, p, span, div, label, td, th {{
 .chg-pill.down {{ background: {RED_BG};   color: {RED_FG};   }}
 .chg-pill.flat {{ background: {GREY_BG};  color: {GREY_FG};  }}
 
-/* ── Breakdown rows inside card ── */
+/* ── Breakdown rows ── */
 .bd-row {{
     display: flex;
     justify-content: space-between;
@@ -156,7 +156,7 @@ body, p, span, div, label, td, th {{
 .bd-label {{ color: {MUTED}; }}
 .bd-value {{ font-weight: 600; color: {TEXT}; margin-right: 0.5rem; }}
 
-/* ── KPI stat card (top row) ── */
+/* ── KPI stat card ── */
 .kpi-card {{
     background: {CARD};
     border: 1px solid {BORDER};
@@ -202,9 +202,7 @@ body, p, span, div, label, td, th {{
     border-collapse: collapse;
     font-size: 0.85rem;
 }}
-.staff-table thead tr {{
-    border-bottom: 2px solid {BORDER};
-}}
+.staff-table thead tr {{ border-bottom: 2px solid {BORDER}; }}
 .staff-table thead th {{
     color: {MUTED};
     font-size: 0.7rem;
@@ -217,21 +215,11 @@ body, p, span, div, label, td, th {{
     background: transparent;
 }}
 .staff-table thead th.r {{ text-align: right; }}
-.staff-table tbody tr {{
-    border-bottom: 1px solid {BORDER};
-    transition: background 0.1s;
-}}
+.staff-table tbody tr {{ border-bottom: 1px solid {BORDER}; transition: background 0.1s; }}
 .staff-table tbody tr:last-child {{ border-bottom: none; }}
 .staff-table tbody tr:hover {{ background: #FAFAFA; }}
-.staff-table tbody td {{
-    padding: 0.65rem 0.85rem;
-    color: {TEXT};
-    white-space: nowrap;
-}}
-.staff-table tbody td.r {{
-    text-align: right;
-    font-variant-numeric: tabular-nums;
-}}
+.staff-table tbody td {{ padding: 0.65rem 0.85rem; color: {TEXT}; white-space: nowrap; }}
+.staff-table tbody td.r {{ text-align: right; font-variant-numeric: tabular-nums; }}
 
 /* ── Rank pills ── */
 .rank-pill {{
@@ -260,38 +248,6 @@ body, p, span, div, label, td, th {{
     white-space: nowrap;
 }}
 
-/* ── Appointments mini grid ── */
-.appt-grid {{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-}}
-.appt-cell {{
-    background: #FAFAFA;
-    border: 1px solid {BORDER};
-    border-radius: 10px;
-    padding: 0.75rem;
-    text-align: center;
-}}
-.appt-label {{
-    font-size: 0.68rem;
-    color: {MUTED};
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    margin-bottom: 0.2rem;
-}}
-.appt-val {{
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: {TEXT};
-}}
-.appt-pct {{
-    font-size: 0.68rem;
-    color: {MUTED};
-    margin-top: 0.1rem;
-}}
-
 /* ── Selectbox ── */
 .stSelectbox [data-baseweb="select"] {{
     background: {CARD} !important;
@@ -317,13 +273,23 @@ body, p, span, div, label, td, th {{
 [data-testid="stImage"] img {{ max-height: 38px; width: auto; }}
 [data-testid="stImage"] {{ margin: 0 !important; padding: 0 !important; }}
 
+/* ── Occupancy unified card (wraps title + chart + legend) ── */
+div[data-testid="stVerticalBlock"]:has(.occ-card-marker) {{
+    background: {CARD};
+    border: 1px solid {BORDER};
+    border-radius: 16px;
+    padding: 1.2rem 1rem 0.9rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    margin-bottom: 0.9rem;
+}}
+.occ-card-marker {{ display: none; }}
+
 /* ── Responsive ── */
 @media (max-width: 900px) {{
     .main .block-container {{
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }}
-    .appt-grid {{ grid-template-columns: 1fr 1fr; }}
 }}
 </style>
 """, unsafe_allow_html=True)
@@ -446,7 +412,7 @@ overall_occ  = sum(occ_vals) / len(occ_vals) if occ_vals else None
 sorted_staff = sorted(staff_list, key=lambda s: float(s.get("total_sales", 0) or 0), reverse=True)
 valid_trend  = [r for r in history if "sales_summary" in r]
 
-# ── Filter pill row (decorative — matches Fresha look) ─────────────────────────
+# ── Filter pill row ─────────────────────────────────────────────────────────────
 st.markdown(f"""
 <div class="db-filter-row">
     <span class="db-filter-pill">← {ps} → {pe}</span>
@@ -463,7 +429,7 @@ t1, t2, t3 = st.columns(3)
 with t1:
     st.markdown(f"""
     <div class="kpi-card">
-        <div class="kpi-label">Net Service Sales ℹ</div>
+        <div class="kpi-label">Net Service Sales</div>
         <div class="kpi-big">{c(net_svc)}</div>
         <div class="kpi-sub">{n(perf.get("services_sold"))} services sold &nbsp;·&nbsp; avg {c(avg_svc)}</div>
     </div>
@@ -472,7 +438,7 @@ with t1:
 with t2:
     st.markdown(f"""
     <div class="kpi-card">
-        <div class="kpi-label">Net Product Sales ℹ</div>
+        <div class="kpi-label">Net Product Sales</div>
         <div class="kpi-big">{c(net_prod)}</div>
         <div class="kpi-sub">{n(perf.get("products_sold"))} products sold</div>
     </div>
@@ -490,7 +456,7 @@ with t3:
 
     st.markdown(f"""
     <div class="kpi-card">
-        <div class="kpi-label">Overall Occupancy ℹ</div>
+        <div class="kpi-label">Overall Occupancy</div>
         <div class="occ-big" style="color:{occ_col_top};">{occ_display}</div>
         <div>
             <span class="occ-pill" style="background:{occ_bg_top};color:{occ_col_top};font-size:0.75rem;">
@@ -548,16 +514,17 @@ if occ_vals:
         bargap=0.3,
     )
 
-    st.markdown(f"""
-    <div class="db-card">
-        <div class="db-card-header">
-            <div class="db-card-title">Occupancy rate ℹ</div>
+    with st.container():
+        st.markdown(f"""
+        <span class="occ-card-marker"></span>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+            <div class="db-card-title">Occupancy rate</div>
             <span style="font-size:0.78rem;color:{MUTED};">{period_label}</span>
         </div>
-    """, unsafe_allow_html=True)
-    st.plotly_chart(fig_occ, use_container_width=True, config={"displayModeBar": False})
-    st.markdown(f"""
-        <div style="display:flex;gap:1.2rem;padding:0.5rem 0 0.2rem;flex-wrap:wrap;">
+        """, unsafe_allow_html=True)
+        st.plotly_chart(fig_occ, use_container_width=True, config={"displayModeBar": False})
+        st.markdown(f"""
+        <div style="display:flex;gap:1.2rem;padding:0.3rem 0 0.1rem;flex-wrap:wrap;">
             <span style="display:flex;align-items:center;gap:0.35rem;font-size:0.75rem;color:{MUTED};">
                 <span style="width:10px;height:10px;border-radius:50%;background:{PURPLE};display:inline-block;"></span>
                 On target (≥ 80%)
@@ -571,8 +538,7 @@ if occ_vals:
                 Below target (< 65%)
             </span>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
 st.markdown("<div style='height:0.75rem'></div>", unsafe_allow_html=True)
 
@@ -586,7 +552,7 @@ with col_sales:
     st.markdown(f"""
     <div class="db-card">
         <div class="db-card-header">
-            <div class="db-card-title">Total sales ℹ</div>
+            <div class="db-card-title">Total sales</div>
             <span class="db-view-link">View report</span>
         </div>
         <div class="db-big-num">{c2(total_s)}</div>
@@ -595,39 +561,27 @@ with col_sales:
         </div>
         <div class="bd-row">
             <span class="bd-label">Services</span>
-            <span style="display:flex;align-items:center;gap:0.4rem;">
-                <span class="bd-value">{c(net_svc)}</span>
-            </span>
+            <span class="bd-value">{c(net_svc)}</span>
         </div>
         <div class="bd-row">
             <span class="bd-label">Products</span>
-            <span style="display:flex;align-items:center;gap:0.4rem;">
-                <span class="bd-value">{c(net_prod)}</span>
-            </span>
+            <span class="bd-value">{c(net_prod)}</span>
         </div>
         <div class="bd-row">
             <span class="bd-label">Tips</span>
-            <span style="display:flex;align-items:center;gap:0.4rem;">
-                <span class="bd-value">{c(tips_val)}</span>
-            </span>
+            <span class="bd-value">{c(tips_val)}</span>
         </div>
         <div class="bd-row">
             <span class="bd-label">No-show fees</span>
-            <span style="display:flex;align-items:center;gap:0.4rem;">
-                <span class="bd-value">{c(noshow_f)}</span>
-            </span>
+            <span class="bd-value">{c(noshow_f)}</span>
         </div>
         <div class="bd-row">
             <span class="bd-label">Cancellation fees</span>
-            <span style="display:flex;align-items:center;gap:0.4rem;">
-                <span class="bd-value">{c(canc_fee)}</span>
-            </span>
+            <span class="bd-value">{c(canc_fee)}</span>
         </div>
         <div class="bd-row">
             <span class="bd-label">Service add-ons</span>
-            <span style="display:flex;align-items:center;gap:0.4rem;">
-                <span class="bd-value">{c(svc_add)}</span>
-            </span>
+            <span class="bd-value">{c(svc_add)}</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -663,18 +617,18 @@ with col_trend:
             showlegend=False,
             hovermode="x unified",
         )
-        st.markdown(f"""
-        <div class="db-card">
-            <div class="db-card-header">
-                <div class="db-card-title">Total sales over time ℹ</div>
+        with st.container():
+            st.markdown(f"""
+            <span class="occ-card-marker" style="display:none"></span>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+                <div class="db-card-title">Total sales over time</div>
                 <span class="db-view-link">View report</span>
             </div>
-        """, unsafe_allow_html=True)
-        st.plotly_chart(fig_trend, use_container_width=True, config={"displayModeBar": False})
-        st.markdown("</div>", unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
+            st.plotly_chart(fig_trend, use_container_width=True, config={"displayModeBar": False})
     else:
         st.markdown(f"""
-        <div class="db-card" style="height:100%;display:flex;align-items:center;justify-content:center;">
+        <div class="db-card" style="display:flex;align-items:center;justify-content:center;min-height:200px;">
             <span style="color:{MUTED};font-size:0.85rem;">More data will appear here after multiple weeks.</span>
         </div>
         """, unsafe_allow_html=True)
@@ -711,7 +665,7 @@ with col_staff:
     st.markdown(f"""
     <div class="db-card">
         <div class="db-card-header">
-            <div class="db-card-title">Staff performance ℹ</div>
+            <div class="db-card-title">Staff performance</div>
             <span style="font-size:0.78rem;color:{MUTED};">{period_label} · ranked by total sales</span>
         </div>
         <div class="table-wrap">
@@ -737,7 +691,7 @@ with col_appts:
     st.markdown(f"""
     <div class="db-card">
         <div class="db-card-header">
-            <div class="db-card-title">Appointments ℹ</div>
+            <div class="db-card-title">Appointments</div>
             <span class="db-view-link">View report</span>
         </div>
         <div class="db-big-num" style="font-size:2rem;">{n(appts.get("total"))}</div>
