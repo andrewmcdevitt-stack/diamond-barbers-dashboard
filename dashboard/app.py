@@ -15,43 +15,49 @@ st.set_page_config(
 # ── Theme ─────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-.stApp { background-color: #0C0C0C !important; }
+.stApp { background-color: #000000 !important; }
 .main .block-container { padding-top: 1.5rem; padding-bottom: 2rem; }
 section[data-testid="stSidebar"] { display: none; }
 #MainMenu, footer { visibility: hidden; }
 
-h1 { color: #F0B429 !important; font-size: 1.8rem !important; font-weight: 700 !important; }
-h2 { color: #F0B429 !important; font-size: 0.85rem !important; font-weight: 600 !important;
+h1 { color: #FFB800 !important; font-size: 1.8rem !important; font-weight: 700 !important; }
+h2 { color: #FFB800 !important; font-size: 0.85rem !important; font-weight: 600 !important;
      text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem !important; }
-hr { border-color: #1E1E1E !important; margin: 1.2rem 0 !important; }
+hr { border-color: #1A1A1A !important; margin: 1.2rem 0 !important; }
 
 .stSelectbox label { color: #555 !important; font-size: 0.75rem !important;
                      text-transform: uppercase; letter-spacing: 0.08em; }
-.stSelectbox [data-baseweb="select"] { background-color: #1A1A1A !important;
+.stSelectbox [data-baseweb="select"] { background-color: #111111 !important;
                                         border-color: #2A2A2A !important; border-radius: 8px !important; }
 .stSelectbox [data-baseweb="select"] * { color: #E5E5E5 !important; }
 
-[data-testid="stMetric"] { background:#141414; border:1px solid #222; border-radius:12px; padding:1rem !important; }
+[data-testid="stMetric"] { background:#0D0D0D; border:1px solid #1E1E1E; border-radius:12px; padding:1rem !important; }
 [data-testid="stMetricLabel"] p { color:#666 !important; font-size:0.72rem !important;
                                    text-transform:uppercase; letter-spacing:0.1em; }
 [data-testid="stMetricValue"] { color:#E5E5E5 !important; font-size:1.5rem !important; font-weight:700 !important; }
 
-.stDataFrame thead tr th { background-color:#1A1A1A !important; color:#F0B429 !important; border-bottom:1px solid #2A2A2A !important; }
-.stDataFrame tbody tr:nth-child(even) td { background-color:#111 !important; }
-.stDataFrame tbody tr:nth-child(odd) td { background-color:#161616 !important; }
-.stDataFrame tbody tr td { color:#CCCCCC !important; border-color:#1E1E1E !important; }
+.stDataFrame thead tr th { background-color:#111111 !important; color:#FFB800 !important; border-bottom:1px solid #222 !important; }
+.stDataFrame tbody tr:nth-child(even) td { background-color:#080808 !important; }
+.stDataFrame tbody tr:nth-child(odd) td { background-color:#0D0D0D !important; }
+.stDataFrame tbody tr td { color:#CCCCCC !important; border-color:#161616 !important; }
+
+.stat-strip { display:flex; gap:0; border:1px solid #1A1A1A; border-radius:12px; overflow:hidden; margin-bottom:0.5rem; }
+.stat-item { flex:1; padding:0.9rem 1rem; text-align:center; border-right:1px solid #1A1A1A; }
+.stat-item:last-child { border-right:none; }
+.stat-label { color:#444; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.3rem; }
+.stat-value { color:#FFB800; font-size:1.1rem; font-weight:700; }
 </style>
 """, unsafe_allow_html=True)
 
 # ── Constants ─────────────────────────────────────────────────────────────────
-GOLD = "#F0B429"
-DARK_CARD = "#141414"
-BORDER = "#222222"
+GOLD = "#FFB800"
+DARK_CARD = "#0D0D0D"
+BORDER = "#1E1E1E"
 GREEN = "#22C55E"
 ORANGE = "#F97316"
 RED = "#EF4444"
-PLOT_BG = "#0F0F0F"
-GRID = "#1E1E1E"
+PLOT_BG = "#050505"
+GRID = "#161616"
 
 DATA_FILE = Path(__file__).parent.parent / "data" / "performance_summary.json"
 
@@ -72,8 +78,8 @@ def card(label, value, color=GOLD, size="normal"):
     return f"""
     <div style="background:{DARK_CARD};border:1px solid {BORDER};border-radius:16px;
                 padding:1.4rem;text-align:center;height:100%;
-                box-shadow:0 2px 20px rgba(240,180,41,0.05);">
-        <div style="color:#555;font-size:0.68rem;text-transform:uppercase;
+                box-shadow:0 2px 20px rgba(255,184,0,0.06);">
+        <div style="color:#444;font-size:0.68rem;text-transform:uppercase;
                     letter-spacing:0.12em;margin-bottom:0.7rem;">{label}</div>
         <div style="color:{color};font-size:{fs};font-weight:700;line-height:1.1;">{value}</div>
     </div>"""
@@ -153,7 +159,7 @@ occ_values = [float(s.get("occupancy_pct", 0) or 0) for s in staff_list if s.get
 overall_occ = sum(occ_values) / len(occ_values) if occ_values else None
 
 if overall_occ is None:
-    occ_color, occ_display = "#555555", "No data yet"
+    occ_color, occ_display = "#444444", "No data yet"
 elif overall_occ >= 80:
     occ_color, occ_display = GREEN, pct(overall_occ)
 elif overall_occ >= 65:
@@ -166,16 +172,6 @@ k1.markdown(card("Net Service Sales", c(sales.get("services")), GOLD, "large"), 
 k2.markdown(card("Net Product Sales", c(sales.get("products")), GOLD, "large"), unsafe_allow_html=True)
 k3.markdown(card("Overall Occupancy", occ_display, occ_color, "large"), unsafe_allow_html=True)
 
-st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
-
-# ── Row 2: Secondary KPIs ─────────────────────────────────────────────────────
-s1, s2, s3, s4, s5 = st.columns(5)
-s1.markdown(card("Total Sales", c(sales.get("total_sales"))), unsafe_allow_html=True)
-s2.markdown(card("Inc. Tips & Charges", c(sales.get("total_sales_and_other"))), unsafe_allow_html=True)
-s3.markdown(card("Appointments", str(n(appts.get("total")))), unsafe_allow_html=True)
-s4.markdown(card("Tips", c(sales.get("tips"))), unsafe_allow_html=True)
-s5.markdown(card("Avg Service Value", c(perf.get("avg_service_value"))), unsafe_allow_html=True)
-
 st.divider()
 
 # ── Occupancy Chart ───────────────────────────────────────────────────────────
@@ -184,7 +180,12 @@ st.subheader("Staff Occupancy")
 if occ_values:
     occ_df = pd.DataFrame(staff_list)
     occ_df["occupancy_pct"] = pd.to_numeric(occ_df["occupancy_pct"], errors="coerce").fillna(0)
-    occ_df = occ_df[occ_df["occupancy_pct"] > 0].sort_values("occupancy_pct", ascending=True)
+    occ_df = occ_df[occ_df["occupancy_pct"] > 0].sort_values("occupancy_pct", ascending=True).reset_index(drop=True)
+
+    # Add rank numbers (rank 1 = highest occupancy = last row after ascending sort)
+    total = len(occ_df)
+    occ_df["rank"] = [total - i for i in range(total)]
+    occ_df["label"] = occ_df.apply(lambda row: f"#{int(row['rank'])}  {row['name']}", axis=1)
 
     bar_colors = [
         GREEN if v >= 80 else (ORANGE if v >= 65 else RED)
@@ -193,7 +194,7 @@ if occ_values:
 
     fig_occ = go.Figure(go.Bar(
         x=occ_df["occupancy_pct"],
-        y=occ_df["name"],
+        y=occ_df["label"],
         orientation="h",
         marker_color=bar_colors,
         marker_line_width=0,
@@ -210,12 +211,12 @@ if occ_values:
     fig_occ.update_layout(
         paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor=PLOT_BG,
         font=dict(color="#AAAAAA"),
-        height=max(320, len(occ_df) * 36),
+        height=max(300, len(occ_df) * 28),
         xaxis=dict(range=[0, 118], showgrid=True, gridcolor=GRID,
                    ticksuffix="%", color="#444", zeroline=False),
         yaxis=dict(color="#CCCCCC"),
         margin=dict(l=10, r=60, t=30, b=20),
-        bargap=0.35,
+        bargap=0.18,
     )
     st.plotly_chart(fig_occ, use_container_width=True)
 
@@ -229,8 +230,8 @@ if occ_values:
     )
 else:
     st.markdown(
-        "<div style='background:#141414;border:1px solid #222;border-radius:12px;"
-        "padding:2rem;text-align:center;color:#444;'>"
+        "<div style='background:#0D0D0D;border:1px solid #1E1E1E;border-radius:12px;"
+        "padding:2rem;text-align:center;color:#333;'>"
         "Occupancy data will appear after the next weekly run</div>",
         unsafe_allow_html=True
     )
@@ -267,7 +268,7 @@ with left:
         font=dict(color="#AAAAAA"), height=280,
         xaxis=dict(showgrid=True, gridcolor=GRID, color="#444", zeroline=False),
         yaxis=dict(color="#CCCCCC"),
-        margin=dict(l=10, r=70, t=10, b=20), bargap=0.35,
+        margin=dict(l=10, r=70, t=10, b=20), bargap=0.3,
     )
     st.plotly_chart(fig_s, use_container_width=True)
 
@@ -276,15 +277,15 @@ with right:
     a1, a2 = st.columns(2)
     a1.markdown(card("Total", str(n(appts.get("total")))), unsafe_allow_html=True)
     a2.markdown(card("Online", f"{n(appts.get('online'))}<br>"
-                f"<span style='font-size:0.9rem;color:#888'>{pct(appts.get('pct_online'))}</span>"),
+                f"<span style='font-size:0.9rem;color:#666'>{pct(appts.get('pct_online'))}</span>"),
                 unsafe_allow_html=True)
     st.markdown("<div style='height:0.6rem'></div>", unsafe_allow_html=True)
     a3, a4 = st.columns(2)
     a3.markdown(card("Cancelled", f"{n(appts.get('cancelled'))}<br>"
-                f"<span style='font-size:0.9rem;color:#888'>{pct(appts.get('pct_cancelled'))}</span>"),
+                f"<span style='font-size:0.9rem;color:#666'>{pct(appts.get('pct_cancelled'))}</span>"),
                 unsafe_allow_html=True)
     a4.markdown(card("No-Shows", f"{n(appts.get('no_shows'))}<br>"
-                f"<span style='font-size:0.9rem;color:#888'>{pct(appts.get('pct_no_show'))}</span>"),
+                f"<span style='font-size:0.9rem;color:#666'>{pct(appts.get('pct_no_show'))}</span>"),
                 unsafe_allow_html=True)
 
     st.markdown("<div style='height:0.8rem'></div>", unsafe_allow_html=True)
@@ -296,6 +297,20 @@ with right:
     p3, p4 = st.columns(2)
     p3.markdown(card("Products Sold", str(n(perf.get("products_sold")))), unsafe_allow_html=True)
     p4.markdown(card("Avg Product", c(perf.get("avg_product_value"))), unsafe_allow_html=True)
+
+st.divider()
+
+# ── Weekly Summary Strip ──────────────────────────────────────────────────────
+st.markdown(
+    f"""<div class="stat-strip">
+        <div class="stat-item"><div class="stat-label">Total Sales</div><div class="stat-value">{c(sales.get("total_sales"))}</div></div>
+        <div class="stat-item"><div class="stat-label">Inc. Tips &amp; Charges</div><div class="stat-value">{c(sales.get("total_sales_and_other"))}</div></div>
+        <div class="stat-item"><div class="stat-label">Appointments</div><div class="stat-value">{n(appts.get("total"))}</div></div>
+        <div class="stat-item"><div class="stat-label">Tips</div><div class="stat-value">{c(sales.get("tips"))}</div></div>
+        <div class="stat-item"><div class="stat-label">Avg Service Value</div><div class="stat-value">{c(perf.get("avg_service_value"))}</div></div>
+    </div>""",
+    unsafe_allow_html=True
+)
 
 st.divider()
 
@@ -340,7 +355,7 @@ if len(valid_trend) > 1:
         line=dict(color=GOLD, width=2),
         marker=dict(color=GOLD, size=7),
         fill="tozeroy",
-        fillcolor="rgba(240,180,41,0.07)",
+        fillcolor="rgba(255,184,0,0.07)",
     ))
     fig_t.update_layout(
         paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor=PLOT_BG,
@@ -352,7 +367,7 @@ if len(valid_trend) > 1:
     st.plotly_chart(fig_t, use_container_width=True)
 
 st.markdown(
-    "<div style='text-align:center;color:#2A2A2A;font-size:0.7rem;padding:1.5rem 0 0.5rem;'>"
+    "<div style='text-align:center;color:#1A1A1A;font-size:0.7rem;padding:1.5rem 0 0.5rem;'>"
     "Diamond Barbers · Auto-refreshes every 5 minutes · Updated every Monday 6:00 AM Darwin time"
     "</div>",
     unsafe_allow_html=True
