@@ -13,13 +13,13 @@ st.set_page_config(
 )
 
 # ── Fresha colour palette ──────────────────────────────────────────────────────
-BG       = "#F2F2F0"
-CARD     = "#FFFFFF"
-BORDER   = "#E8E8E6"
-TEXT     = "#1A1A1A"
-MUTED    = "#6B6B6B"
-PURPLE   = "#5B5BD6"
-PURPLE_L = "#9B9BE8"
+BG       = "#F7F7F5"   # warm light grey page background (matches Fresha)
+CARD     = "#FFFFFF"   # white cards
+BORDER   = "#E8E8E6"   # subtle card border
+TEXT     = "#1A1A1A"   # near-black body text
+MUTED    = "#6B6B6B"   # muted grey
+PURPLE   = "#5B5BD6"   # Fresha purple accent (links, chart lines)
+PURPLE_L = "#9B9BE8"   # lighter purple (comparison lines / secondary)
 GREEN_BG = "#DCFCE7"
 GREEN_FG = "#16A34A"
 RED_BG   = "#FEE2E2"
@@ -290,6 +290,7 @@ div[data-testid="stVerticalBlock"]:has(.occ-card-marker) {{
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }}
+    .appt-grid {{ grid-template-columns: 1fr 1fr; }}
 }}
 </style>
 """, unsafe_allow_html=True)
@@ -524,7 +525,7 @@ if occ_vals:
         """, unsafe_allow_html=True)
         st.plotly_chart(fig_occ, use_container_width=True, config={"displayModeBar": False})
         st.markdown(f"""
-        <div style="display:flex;gap:1.2rem;padding:0.3rem 0 0.1rem;flex-wrap:wrap;">
+        <div style="display:flex;gap:1.2rem;padding:0.3rem 0 1.2rem;flex-wrap:wrap;">
             <span style="display:flex;align-items:center;gap:0.35rem;font-size:0.75rem;color:{MUTED};">
                 <span style="width:10px;height:10px;border-radius:50%;background:{PURPLE};display:inline-block;"></span>
                 On target (≥ 80%)
@@ -617,18 +618,18 @@ with col_trend:
             showlegend=False,
             hovermode="x unified",
         )
-        with st.container():
-            st.markdown(f"""
-            <span class="occ-card-marker" style="display:none"></span>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+        st.markdown(f"""
+        <div class="db-card">
+            <div class="db-card-header">
                 <div class="db-card-title">Total sales over time</div>
                 <span class="db-view-link">View report</span>
             </div>
-            """, unsafe_allow_html=True)
-            st.plotly_chart(fig_trend, use_container_width=True, config={"displayModeBar": False})
+        </div>
+        """, unsafe_allow_html=True)
+        st.plotly_chart(fig_trend, use_container_width=True, config={"displayModeBar": False})
     else:
         st.markdown(f"""
-        <div class="db-card" style="display:flex;align-items:center;justify-content:center;min-height:200px;">
+        <div class="db-card" style="height:100%;display:flex;align-items:center;justify-content:center;">
             <span style="color:{MUTED};font-size:0.85rem;">More data will appear here after multiple weeks.</span>
         </div>
         """, unsafe_allow_html=True)
