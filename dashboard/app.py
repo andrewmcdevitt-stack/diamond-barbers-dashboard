@@ -110,7 +110,7 @@ body, p, span, div, label, td, th {{
     background: {CARD};
     border: 1px solid {BORDER};
     border-radius: 16px;
-    padding: 2rem;
+    padding: 2rem !important;
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     margin-bottom: 0.9rem;
 }}
@@ -178,7 +178,7 @@ body, p, span, div, label, td, th {{
     background: {CARD};
     border: 1px solid {BORDER};
     border-radius: 16px;
-    padding: 2rem;
+    padding: 2rem !important;
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }}
 .kpi-label {{
@@ -346,6 +346,13 @@ body, p, span, div, label, td, th {{
 [data-testid="column"] > div[data-testid="stVerticalBlock"] {{ height: 100% !important; }}
 [data-testid="column"] > div[data-testid="stVerticalBlock"] > div {{ height: 100% !important; }}
 .kpi-card {{ height: 100% !important; box-sizing: border-box !important; }}
+
+/* ── Markdown container ── */
+[data-testid="stMarkdownContainer"] {{
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}}
 
 /* ── Logo ── */
 [data-testid="stImage"] img {{ max-height: 192px; width: auto; }}
