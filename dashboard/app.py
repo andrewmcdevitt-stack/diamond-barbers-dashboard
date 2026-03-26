@@ -38,6 +38,11 @@ st.markdown(f"""
 <style>
 /* ── Base ── */
 .stApp {{ background-color: {BG} !important; }}
+.main {{ background: transparent !important; }}
+[data-testid="stAppViewContainer"] {{ background: transparent !important; }}
+[data-testid="stAppViewBlockContainer"] {{ background: transparent !important; }}
+[data-testid="stVerticalBlock"] {{ background: transparent !important; }}
+[data-testid="stVerticalBlockBorderWrapper"] {{ background: transparent !important; }}
 section[data-testid="stSidebar"] {{ display: none !important; }}
 #MainMenu, footer, header {{ visibility: hidden !important; }}
 * {{ box-sizing: border-box; margin: 0; padding: 0; }}
@@ -293,6 +298,7 @@ body, p, span, div, label, td, th {{
 }}
 
 /* ── Selectbox ── */
+.stSelectbox {{ margin-top: 1rem !important; }}
 .stSelectbox [data-baseweb="select"] {{
     background: {CARD} !important;
     border: 1px solid {BORDER} !important;
@@ -314,7 +320,7 @@ body, p, span, div, label, td, th {{
 [data-testid="column"]:last-child {{ padding-right: 0 !important; }}
 
 /* ── Logo ── */
-[data-testid="stImage"] img {{ max-height: 64px; width: auto; }}
+[data-testid="stImage"] img {{ max-height: 192px; width: auto; }}
 [data-testid="stImage"] {{ margin: 0 !important; padding: 0 !important; }}
 
 /* ── Occupancy unified card (wraps title + chart + legend) ── */
