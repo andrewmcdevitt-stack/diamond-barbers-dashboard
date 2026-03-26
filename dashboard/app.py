@@ -323,6 +323,12 @@ body, p, span, div, label, td, th {{
 .stSelectbox label {{ color: {MUTED} !important; font-size: 0.72rem !important; }}
 
 /* ── Charts ── */
+[data-testid="stPlotlyChart"] {{
+    border: 1px solid {BORDER} !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    margin-bottom: 0.9rem !important;
+}}
 [data-testid="stPlotlyChart"] > div {{
     background: transparent !important;
     border: none !important;
@@ -338,26 +344,6 @@ body, p, span, div, label, td, th {{
 [data-testid="stImage"] img {{ max-height: 192px; width: auto; }}
 [data-testid="stImage"] {{ margin: 0 !important; padding: 0 !important; }}
 
-.occ-card-marker {{ display: none; }}
-.trend-card-marker {{ display: none; }}
-
-/* ── Occupancy chart card ── */
-[data-testid="stVerticalBlock"]:has(.occ-card-marker) {{
-    background: {CARD} !important;
-    border: 1px solid {BORDER} !important;
-    border-radius: 16px !important;
-    padding: 1.4rem 1.5rem !important;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04) !important;
-}}
-
-/* ── Trend chart card ── */
-[data-testid="stVerticalBlock"]:has(.trend-card-marker) {{
-    background: {CARD} !important;
-    border: 1px solid {BORDER} !important;
-    border-radius: 16px !important;
-    padding: 1.4rem 1.5rem !important;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04) !important;
-}}
 
 /* ── Responsive ── */
 @media (max-width: 900px) {{
@@ -570,10 +556,16 @@ if occ_vals:
     fig_occ.add_vline(x=80, line_dash="dot", line_color=PURPLE,  line_width=1.5)
     fig_occ.add_vline(x=65, line_dash="dot", line_color=WARN_FG, line_width=1.5)
     fig_occ.update_layout(
-        paper_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor=CARD,
         plot_bgcolor=CARD,
         font=dict(color=TEXT, size=11, family="sans-serif"),
-        height=max(200, len(occ_df) * 36),
+        height=max(260, len(occ_df) * 36 + 90),
+        title=dict(
+            text="Occupancy rate",
+            font=dict(color=TEXT, size=14),
+            x=0.01, xanchor="left",
+            y=0.99, yanchor="top",
+        ),
         xaxis=dict(
             range=[0, 100],
             showgrid=True, gridcolor=GRID,
@@ -581,35 +573,25 @@ if occ_vals:
             zeroline=False, tickfont=dict(size=10),
         ),
         yaxis=dict(color=TEXT, tickfont=dict(size=11)),
-        margin=dict(l=10, r=20, t=10, b=10),
+        margin=dict(l=10, r=20, t=40, b=55),
         bargap=0.3,
+        annotations=[
+            dict(xref="paper", yref="paper", x=0.01, y=-0.06,
+                 text=f"● On target (≥ 80%)", showarrow=False,
+                 font=dict(size=10, color=PURPLE), xanchor="left"),
+            dict(xref="paper", yref="paper", x=0.28, y=-0.06,
+                 text=f"● Needs attention (65–79%)", showarrow=False,
+                 font=dict(size=10, color=WARN_FG), xanchor="left"),
+            dict(xref="paper", yref="paper", x=0.62, y=-0.06,
+                 text=f"● Below target (< 65%)", showarrow=False,
+                 font=dict(size=10, color=RED_FG), xanchor="left"),
+            dict(xref="paper", yref="paper", x=0.99, y=1.04,
+                 text=period_label, showarrow=False,
+                 font=dict(size=11, color=MUTED), xanchor="right"),
+        ],
     )
 
-    with st.container():
-        st.markdown(f"""
-        <span class="occ-card-marker"></span>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
-            <div class="db-card-title">Occupancy rate</div>
-            <span style="font-size:0.78rem;color:{MUTED};">{period_label}</span>
-        </div>
-        """, unsafe_allow_html=True)
-        st.plotly_chart(fig_occ, use_container_width=True, config={"displayModeBar": False})
-        st.markdown(f"""
-        <div style="display:flex;gap:1.2rem;padding:0.3rem 0 1.2rem;flex-wrap:wrap;">
-            <span style="display:flex;align-items:center;gap:0.35rem;font-size:0.75rem;color:{MUTED};">
-                <span style="width:10px;height:10px;border-radius:50%;background:{PURPLE};display:inline-block;"></span>
-                On target (≥ 80%)
-            </span>
-            <span style="display:flex;align-items:center;gap:0.35rem;font-size:0.75rem;color:{MUTED};">
-                <span style="width:10px;height:10px;border-radius:50%;background:{WARN_FG};display:inline-block;"></span>
-                Needs attention (65–79%)
-            </span>
-            <span style="display:flex;align-items:center;gap:0.35rem;font-size:0.75rem;color:{MUTED};">
-                <span style="width:10px;height:10px;border-radius:50%;background:{RED_FG};display:inline-block;"></span>
-                Below target (< 65%)
-            </span>
-        </div>
-        """, unsafe_allow_html=True)
+    st.plotly_chart(fig_occ, use_container_width=True, config={"displayModeBar": False})
 
 st.markdown("<div style='height:0.75rem'></div>", unsafe_allow_html=True)
 
@@ -688,11 +670,17 @@ with col_trend:
             fillcolor="rgba(91,91,214,0.07)",
         ))
         fig_trend.update_layout(
-            paper_bgcolor="rgba(0,0,0,0)",
+            paper_bgcolor=CARD,
             plot_bgcolor=CARD,
             font=dict(color=TEXT, size=10),
             height=300,
-            margin=dict(l=10, r=10, t=10, b=10),
+            title=dict(
+                text="Total sales over time",
+                font=dict(color=TEXT, size=14),
+                x=0.01, xanchor="left",
+                y=0.99, yanchor="top",
+            ),
+            margin=dict(l=10, r=10, t=40, b=10),
             xaxis=dict(showgrid=True, gridcolor=GRID, color=MUTED, zeroline=False,
                        tickfont=dict(size=10)),
             yaxis=dict(showgrid=True, gridcolor=GRID, color=MUTED, zeroline=False,
@@ -700,15 +688,7 @@ with col_trend:
             showlegend=False,
             hovermode="x unified",
         )
-        with st.container():
-            st.markdown(f"""
-            <span class="trend-card-marker"></span>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
-                <div class="db-card-title">Total sales over time</div>
-                <span class="db-view-link">View report</span>
-            </div>
-            """, unsafe_allow_html=True)
-            st.plotly_chart(fig_trend, use_container_width=True, config={"displayModeBar": False})
+        st.plotly_chart(fig_trend, use_container_width=True, config={"displayModeBar": False})
     else:
         st.markdown(f"""
         <div class="db-card" style="height:100%;display:flex;align-items:center;justify-content:center;">
