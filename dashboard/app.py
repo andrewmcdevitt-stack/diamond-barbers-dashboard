@@ -38,10 +38,14 @@ st.markdown(f"""
 <style>
 /* ── Base ── */
 .stApp {{ background-color: {BG} !important; }}
+.stApp > div,
+.stApp > div > div,
+.stApp > div > div > div,
 .main,
 section.main,
 [data-testid="stMain"],
 [data-testid="stAppViewContainer"],
+[data-testid="stAppViewContainer"] > div,
 [data-testid="stAppViewBlockContainer"],
 [data-testid="stMainBlockContainer"],
 [data-testid="stVerticalBlock"],
@@ -49,11 +53,13 @@ section.main,
     background: transparent !important;
     box-shadow: none !important;
     border: none !important;
+    border-radius: 0 !important;
 }}
 .main .block-container {{
     background: transparent !important;
     box-shadow: none !important;
     border: none !important;
+    border-radius: 0 !important;
 }}
 section[data-testid="stSidebar"] {{ display: none !important; }}
 #MainMenu, footer, header {{ visibility: hidden !important; }}
