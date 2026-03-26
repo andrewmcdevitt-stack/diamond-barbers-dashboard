@@ -13,13 +13,13 @@ st.set_page_config(
 )
 
 # ── Dark colour palette ────────────────────────────────────────────────────────
-BG       = "#000000"   # black background
-CARD     = "#1A1A1A"   # dark grey cards
-BORDER   = "#2E2E2E"   # subtle dark border
-TEXT     = "#FFFFFF"   # white body text
-MUTED    = "#9B9B9B"   # muted grey
-PURPLE   = "#7B7BFF"   # purple accent
-PURPLE_L = "#9B9BE8"   # lighter purple
+BG       = "#000000"
+CARD     = "#1A1A1A"
+BORDER   = "#2E2E2E"
+TEXT     = "#FFFFFF"
+MUTED    = "#9B9B9B"
+PURPLE   = "#7B7BFF"
+PURPLE_L = "#9B9BE8"
 GREEN_BG = "#0D2E1A"
 GREEN_FG = "#34D399"
 RED_BG   = "#2E0D0D"
@@ -33,10 +33,17 @@ GRID     = "#2E2E2E"
 DATA_FILE = Path(__file__).parent.parent / "data" / "performance_summary.json"
 LOGO_FILE = Path(__file__).parent / "logo.png"
 
-# ── CSS ────────────────────────────────────────────────────────────────────────
 st.markdown(f"""
 <style>
-/* ── Base ── */
+[data-testid="stAppViewContainer"],
+[data-testid="stAppViewBlockContainer"],
+[data-testid="stMainBlockContainer"],
+.stApp > div {{
+    background: #000000 !important;
+    border-color: #000000 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}}
 section[data-testid="stSidebar"] {{ display: none !important; }}
 #MainMenu, footer, header {{ visibility: hidden !important; }}
 * {{ box-sizing: border-box; margin: 0; padding: 0; }}
@@ -44,7 +51,6 @@ body, p, span, div, label, td, th {{
     color: {TEXT};
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }}
-
 .main .block-container {{
     padding-top: 2rem !important;
     padding-left: 2.5rem !important;
@@ -52,258 +58,69 @@ body, p, span, div, label, td, th {{
     padding-bottom: 2rem !important;
     max-width: 100% !important;
 }}
-
-/* ── Page header ── */
-.db-page-title {{
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: {TEXT};
-    line-height: 1.2;
-    margin-bottom: 0.1rem;
-}}
-.db-page-sub {{
-    font-size: 0.82rem;
-    color: {MUTED};
-}}
-
-/* ── Filter pill buttons ── */
-.db-filter-row {{
-    display: flex;
-    gap: 0.5rem;
-    margin: 1rem 0 1.5rem;
-    flex-wrap: wrap;
-}}
-.db-filter-pill {{
-    background: {CARD};
-    border: 1px solid {BORDER};
-    border-radius: 20px;
-    padding: 0.35rem 0.85rem;
-    font-size: 0.8rem;
-    color: {TEXT};
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    white-space: nowrap;
-}}
-
-/* ── Card ── */
+.db-page-title {{ font-size: 1.6rem; font-weight: 700; color: {TEXT}; line-height: 1.2; margin-bottom: 0.1rem; }}
+.db-page-sub {{ font-size: 0.82rem; color: {MUTED}; }}
 .db-card {{
-    background: {CARD};
-    border: 1px solid {BORDER};
-    border-radius: 16px;
-    padding: 1.4rem 1.5rem;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-    margin-bottom: 0.9rem;
+    background: {CARD}; border: 1px solid {BORDER}; border-radius: 16px;
+    padding: 1.4rem 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.3); margin-bottom: 0.9rem;
 }}
-
-/* ── Card title row ── */
-.db-card-header {{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.9rem;
-}}
-.db-card-title {{
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: {TEXT};
-}}
-.db-view-link {{
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: {PURPLE};
-    text-decoration: none;
-    white-space: nowrap;
-}}
-
-/* ── Big metric number ── */
-.db-big-num {{
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: {TEXT};
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin-bottom: 0.4rem;
-}}
-
-/* ── Change badge ── */
-.chg-pill {{
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    border-radius: 20px;
-    padding: 0.18rem 0.55rem;
-    font-size: 0.72rem;
-    font-weight: 600;
-    white-space: nowrap;
-}}
+.db-card-header {{ display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.9rem; }}
+.db-card-title {{ font-size: 0.95rem; font-weight: 700; color: {TEXT}; }}
+.db-view-link {{ font-size: 0.82rem; font-weight: 500; color: {PURPLE}; text-decoration: none; white-space: nowrap; }}
+.db-big-num {{ font-size: 2.4rem; font-weight: 700; color: {TEXT}; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 0.4rem; }}
+.chg-pill {{ display: inline-flex; align-items: center; gap: 0.25rem; border-radius: 20px; padding: 0.18rem 0.55rem; font-size: 0.72rem; font-weight: 600; white-space: nowrap; }}
 .chg-pill.up   {{ background: {GREEN_BG}; color: {GREEN_FG}; }}
 .chg-pill.down {{ background: {RED_BG};   color: {RED_FG};   }}
 .chg-pill.flat {{ background: {GREY_BG};  color: {GREY_FG};  }}
-
-/* ── Breakdown rows ── */
-.bd-row {{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.55rem 0;
-    border-bottom: 1px solid {BORDER};
-    font-size: 0.85rem;
-}}
+.bd-row {{ display: flex; justify-content: space-between; align-items: center; padding: 0.55rem 0; border-bottom: 1px solid {BORDER}; font-size: 0.85rem; }}
 .bd-row:last-child {{ border-bottom: none; }}
 .bd-label {{ color: {MUTED}; }}
 .bd-value {{ font-weight: 600; color: {TEXT}; margin-right: 0.5rem; }}
-
-/* ── KPI card ── */
-.kpi-card {{
-    background: {CARD};
-    border: 1px solid {BORDER};
-    border-radius: 16px;
-    padding: 1.3rem 1.5rem 1.2rem;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-}}
-.kpi-label {{
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: {TEXT};
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-}}
-.kpi-big {{
-    font-size: 1.9rem;
-    font-weight: 700;
-    color: {TEXT};
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin-bottom: 0.35rem;
-}}
-.kpi-sub {{
-    font-size: 0.75rem;
-    color: {MUTED};
-}}
-
-/* ── Occupancy big % ── */
-.occ-big {{
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin-bottom: 0.35rem;
-}}
-
-/* ── Staff table ── */
-.table-wrap {{ overflow-x: auto; -webkit-overflow-scrolling: touch; }}
-.staff-table {{
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.85rem;
-}}
+.kpi-card {{ background: {CARD}; border: 1px solid {BORDER}; border-radius: 16px; padding: 1.3rem 1.5rem 1.2rem; box-shadow: 0 1px 4px rgba(0,0,0,0.3); }}
+.kpi-label {{ font-size: 0.82rem; font-weight: 700; color: {TEXT}; margin-bottom: 0.5rem; }}
+.kpi-big {{ font-size: 1.9rem; font-weight: 700; color: {TEXT}; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.35rem; }}
+.kpi-sub {{ font-size: 0.75rem; color: {MUTED}; }}
+.occ-big {{ font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.35rem; }}
+.occ-pill {{ display: inline-block; border-radius: 20px; padding: 0.18rem 0.6rem; font-size: 0.72rem; font-weight: 600; white-space: nowrap; }}
+.table-wrap {{ overflow-x: auto; }}
+.staff-table {{ width: 100%; border-collapse: collapse; font-size: 0.85rem; }}
 .staff-table thead tr {{ border-bottom: 2px solid {BORDER}; }}
-.staff-table thead th {{
-    color: {MUTED};
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 0.5rem 0.85rem;
-    text-align: left;
-    white-space: nowrap;
-    background: transparent;
-}}
+.staff-table thead th {{ color: {MUTED}; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.5rem 0.85rem; text-align: left; white-space: nowrap; background: transparent; }}
 .staff-table thead th.r {{ text-align: right; }}
-.staff-table tbody tr {{ border-bottom: 1px solid {BORDER}; transition: background 0.1s; }}
+.staff-table tbody tr {{ border-bottom: 1px solid {BORDER}; }}
 .staff-table tbody tr:last-child {{ border-bottom: none; }}
 .staff-table tbody tr:hover {{ background: #222222; }}
 .staff-table tbody td {{ padding: 0.65rem 0.85rem; color: {TEXT}; white-space: nowrap; }}
 .staff-table tbody td.r {{ text-align: right; font-variant-numeric: tabular-nums; }}
-
-/* ── Rank pills ── */
-.rank-pill {{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: {GREY_BG};
-    border-radius: 6px;
-    padding: 0.12rem 0.45rem;
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: {GREY_FG};
-    min-width: 2rem;
-}}
+.rank-pill {{ display: inline-flex; align-items: center; justify-content: center; background: {GREY_BG}; border-radius: 6px; padding: 0.12rem 0.45rem; font-size: 0.7rem; font-weight: 700; color: {GREY_FG}; min-width: 2rem; }}
 .rank-pill.r1 {{ background: #1E1E3F; color: {PURPLE}; }}
 .rank-pill.r2 {{ background: {GREEN_BG}; color: {GREEN_FG}; }}
 .rank-pill.r3 {{ background: {WARN_BG}; color: {WARN_FG}; }}
-
-/* ── Occupancy pill ── */
-.occ-pill {{
-    display: inline-block;
-    border-radius: 20px;
-    padding: 0.18rem 0.6rem;
-    font-size: 0.72rem;
-    font-weight: 600;
-    white-space: nowrap;
-}}
-
-/* ── Selectbox ── */
 .stSelectbox {{ margin-top: 1rem !important; }}
-.stSelectbox [data-baseweb="select"] {{
-    border: 1px solid {BORDER} !important;
-    border-radius: 20px !important;
-}}
+.stSelectbox [data-baseweb="select"] {{ border: 1px solid {BORDER} !important; border-radius: 20px !important; }}
 .stSelectbox [data-baseweb="select"] * {{ color: {TEXT} !important; }}
-.stSelectbox label {{ color: {MUTED} !important; font-size: 0.72rem !important; }}
-
-/* ── Charts ── */
-[data-testid="stPlotlyChart"] > div {{
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-}}
-
-/* ── Column gaps ── */
+[data-testid="stPlotlyChart"] > div {{ background: transparent !important; border: none !important; padding: 0 !important; }}
 [data-testid="column"] {{ padding: 0 0.4rem !important; }}
 [data-testid="column"]:first-child {{ padding-left: 0 !important; }}
 [data-testid="column"]:last-child {{ padding-right: 0 !important; }}
-
-/* ── Logo ── */
 [data-testid="stImage"] img {{ max-height: 192px; width: auto; }}
 [data-testid="stImage"] {{ margin: 0 !important; padding: 0 !important; }}
-
-/* ── Unified chart cards ── */
 div[data-testid="stVerticalBlock"]:has(.occ-card-marker) {{
-    background: {CARD} !important;
-    border: 1px solid {BORDER} !important;
-    border-radius: 16px !important;
-    padding: 1.2rem 1rem 0.9rem !important;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.3) !important;
-    margin-bottom: 0.9rem !important;
+    background: {CARD} !important; border: 1px solid {BORDER} !important;
+    border-radius: 16px !important; padding: 1.2rem 1rem 0.9rem !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3) !important; margin-bottom: 0.9rem !important;
 }}
 div[data-testid="stVerticalBlock"]:has(.trend-card-marker) {{
-    background: {CARD} !important;
-    border: 1px solid {BORDER} !important;
-    border-radius: 16px !important;
-    padding: 1.2rem 1rem 0.9rem !important;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.3) !important;
-    margin-bottom: 0.9rem !important;
+    background: {CARD} !important; border: 1px solid {BORDER} !important;
+    border-radius: 16px !important; padding: 1.2rem 1rem 0.9rem !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3) !important; margin-bottom: 0.9rem !important;
 }}
 .occ-card-marker {{ display: none; }}
 .trend-card-marker {{ display: none; }}
-
-/* ── Responsive ── */
-@media (max-width: 900px) {{
-    .main .block-container {{
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-    }}
-}}
 </style>
 """, unsafe_allow_html=True)
 
 
-# ── Helpers ────────────────────────────────────────────────────────────────────
 @st.cache_data(ttl=300)
 def load_data():
     if not DATA_FILE.exists():
@@ -362,7 +179,6 @@ def rank_pill(i):
     return f"<span class='rank-pill {cls}'>#{i}</span>"
 
 
-# ── Load ──────────────────────────────────────────────────────────────────────
 history = load_data()
 
 if not history:
@@ -372,7 +188,6 @@ if not history:
 
 reversed_history = list(reversed(history))
 
-# ── Page header ────────────────────────────────────────────────────────────────
 if LOGO_FILE.exists():
     st.image(str(LOGO_FILE))
 st.markdown(
@@ -381,7 +196,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ── Week selector ───────────────────────────────────────────────────────────────
 sel_col, _ = st.columns([2, 3])
 with sel_col:
     selected_idx = st.selectbox(
@@ -395,7 +209,6 @@ with sel_col:
         label_visibility="collapsed",
     )
 
-# ── Selected data ──────────────────────────────────────────────────────────────
 latest     = reversed_history[selected_idx]
 sales      = latest.get("sales_summary", {})
 appts      = latest.get("appointments", {})
@@ -421,18 +234,8 @@ overall_occ  = sum(occ_vals) / len(occ_vals) if occ_vals else None
 sorted_staff = sorted(staff_list, key=lambda s: float(s.get("total_sales", 0) or 0), reverse=True)
 valid_trend  = [r for r in history if "sales_summary" in r]
 
-# ── Filter pill row ─────────────────────────────────────────────────────────────
-st.markdown(f"""
-<div class="db-filter-row">
-    <span class="db-filter-pill">← {ps} → {pe}</span>
-    <span class="db-filter-pill">Weekly report</span>
-</div>
-""", unsafe_allow_html=True)
+st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
 
-
-# ══════════════════════════════════════════════════════════════════════════════
-# TOP ROW — Net Service Sales | Net Product Sales | Overall Occupancy
-# ══════════════════════════════════════════════════════════════════════════════
 t1, t2, t3 = st.columns(3)
 
 with t1:
@@ -443,9 +246,7 @@ with t1:
         else:                   occ_bg_top = RED_BG
     else:
         occ_bg_top = GREY_BG
-
     occ_display = pct(overall_occ) if overall_occ is not None else "No data"
-
     st.markdown(f"""
     <div class="kpi-card">
         <div class="kpi-label">Net Service Sales</div>
@@ -478,10 +279,6 @@ with t3:
 
 st.markdown("<div style='height:0.75rem'></div>", unsafe_allow_html=True)
 
-
-# ══════════════════════════════════════════════════════════════════════════════
-# OCCUPANCY BAR CHART
-# ══════════════════════════════════════════════════════════════════════════════
 if occ_vals:
     occ_df = pd.DataFrame(staff_list)
     occ_df["occupancy_pct"] = pd.to_numeric(occ_df["occupancy_pct"], errors="coerce").fillna(0)
@@ -490,38 +287,24 @@ if occ_vals:
               .reset_index(drop=True))
     total_o         = len(occ_df)
     occ_df["rank"]  = [total_o - i for i in range(total_o)]
-    occ_df["label"] = occ_df.apply(
-        lambda r: f"#{int(r['rank'])} {r['name'].split()[0]}", axis=1
-    )
+    occ_df["label"] = occ_df.apply(lambda r: f"#{int(r['rank'])} {r['name'].split()[0]}", axis=1)
     bar_colors = [occ_color(v) for v in occ_df["occupancy_pct"]]
 
     fig_occ = go.Figure(go.Bar(
-        x=occ_df["occupancy_pct"],
-        y=occ_df["label"],
-        orientation="h",
-        marker_color=bar_colors,
-        marker_line_width=0,
+        x=occ_df["occupancy_pct"], y=occ_df["label"], orientation="h",
+        marker_color=bar_colors, marker_line_width=0,
         text=[f"{v:.0f}%" for v in occ_df["occupancy_pct"]],
-        textposition="inside",
-        textfont=dict(color="#FFFFFF", size=11),
-        cliponaxis=False,
+        textposition="inside", textfont=dict(color="#FFFFFF", size=11), cliponaxis=False,
     ))
-    fig_occ.add_vline(x=80, line_dash="dot", line_color=PURPLE,  line_width=1.5)
+    fig_occ.add_vline(x=80, line_dash="dot", line_color=PURPLE, line_width=1.5)
     fig_occ.add_vline(x=65, line_dash="dot", line_color=WARN_FG, line_width=1.5)
     fig_occ.update_layout(
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor=CARD,
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor=CARD,
         font=dict(color=TEXT, size=11, family="sans-serif"),
         height=max(200, len(occ_df) * 36),
-        xaxis=dict(
-            range=[0, 100],
-            showgrid=True, gridcolor=GRID,
-            ticksuffix="%", color=MUTED,
-            zeroline=False, tickfont=dict(size=10),
-        ),
+        xaxis=dict(range=[0,100], showgrid=True, gridcolor=GRID, ticksuffix="%", color=MUTED, zeroline=False, tickfont=dict(size=10)),
         yaxis=dict(color=TEXT, tickfont=dict(size=11)),
-        margin=dict(l=10, r=20, t=10, b=10),
-        bargap=0.3,
+        margin=dict(l=10, r=20, t=10, b=10), bargap=0.3,
     )
 
     with st.container():
@@ -536,26 +319,19 @@ if occ_vals:
         st.markdown(f"""
         <div style="display:flex;gap:1.2rem;padding:0.3rem 0 1.2rem;flex-wrap:wrap;">
             <span style="display:flex;align-items:center;gap:0.35rem;font-size:0.75rem;color:{MUTED};">
-                <span style="width:10px;height:10px;border-radius:50%;background:{PURPLE};display:inline-block;"></span>
-                On target (≥ 80%)
+                <span style="width:10px;height:10px;border-radius:50%;background:{PURPLE};display:inline-block;"></span>On target (≥ 80%)
             </span>
             <span style="display:flex;align-items:center;gap:0.35rem;font-size:0.75rem;color:{MUTED};">
-                <span style="width:10px;height:10px;border-radius:50%;background:{WARN_FG};display:inline-block;"></span>
-                Needs attention (65–79%)
+                <span style="width:10px;height:10px;border-radius:50%;background:{WARN_FG};display:inline-block;"></span>Needs attention (65–79%)
             </span>
             <span style="display:flex;align-items:center;gap:0.35rem;font-size:0.75rem;color:{MUTED};">
-                <span style="width:10px;height:10px;border-radius:50%;background:{RED_FG};display:inline-block;"></span>
-                Below target (< 65%)
+                <span style="width:10px;height:10px;border-radius:50%;background:{RED_FG};display:inline-block;"></span>Below target (< 65%)
             </span>
         </div>
         """, unsafe_allow_html=True)
 
 st.markdown("<div style='height:0.75rem'></div>", unsafe_allow_html=True)
 
-
-# ══════════════════════════════════════════════════════════════════════════════
-# MIDDLE ROW — Total Sales breakdown (left) + Sales trend chart (right)
-# ══════════════════════════════════════════════════════════════════════════════
 col_sales, col_trend = st.columns([2, 3])
 
 with col_sales:
@@ -569,42 +345,12 @@ with col_sales:
         <div style="margin-bottom:0.9rem;">
             <span class="chg-pill flat">↕ inc. tips &amp; charges: {c2(inc_tips)}</span>
         </div>
-        <div class="bd-row">
-            <span class="bd-label">Services</span>
-            <span style="display:flex;align-items:center;gap:0.4rem;">
-                <span class="bd-value">{c(net_svc)}</span>
-            </span>
-        </div>
-        <div class="bd-row">
-            <span class="bd-label">Products</span>
-            <span style="display:flex;align-items:center;gap:0.4rem;">
-                <span class="bd-value">{c(net_prod)}</span>
-            </span>
-        </div>
-        <div class="bd-row">
-            <span class="bd-label">Tips</span>
-            <span style="display:flex;align-items:center;gap:0.4rem;">
-                <span class="bd-value">{c(tips_val)}</span>
-            </span>
-        </div>
-        <div class="bd-row">
-            <span class="bd-label">No-show fees</span>
-            <span style="display:flex;align-items:center;gap:0.4rem;">
-                <span class="bd-value">{c(noshow_f)}</span>
-            </span>
-        </div>
-        <div class="bd-row">
-            <span class="bd-label">Cancellation fees</span>
-            <span style="display:flex;align-items:center;gap:0.4rem;">
-                <span class="bd-value">{c(canc_fee)}</span>
-            </span>
-        </div>
-        <div class="bd-row">
-            <span class="bd-label">Service add-ons</span>
-            <span style="display:flex;align-items:center;gap:0.4rem;">
-                <span class="bd-value">{c(svc_add)}</span>
-            </span>
-        </div>
+        <div class="bd-row"><span class="bd-label">Services</span><span class="bd-value">{c(net_svc)}</span></div>
+        <div class="bd-row"><span class="bd-label">Products</span><span class="bd-value">{c(net_prod)}</span></div>
+        <div class="bd-row"><span class="bd-label">Tips</span><span class="bd-value">{c(tips_val)}</span></div>
+        <div class="bd-row"><span class="bd-label">No-show fees</span><span class="bd-value">{c(noshow_f)}</span></div>
+        <div class="bd-row"><span class="bd-label">Cancellation fees</span><span class="bd-value">{c(canc_fee)}</span></div>
+        <div class="bd-row"><span class="bd-label">Service add-ons</span><span class="bd-value">{c(svc_add)}</span></div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -617,27 +363,18 @@ with col_trend:
 
         fig_trend = go.Figure()
         fig_trend.add_trace(go.Scatter(
-            x=trend_df["Week"],
-            y=trend_df["Sales"],
-            mode="lines+markers",
-            name="Weekly sales",
-            line=dict(color=PURPLE, width=2.5),
-            marker=dict(color=PURPLE, size=6),
-            fill="tozeroy",
-            fillcolor="rgba(123,123,255,0.1)",
+            x=trend_df["Week"], y=trend_df["Sales"],
+            mode="lines+markers", name="Weekly sales",
+            line=dict(color=PURPLE, width=2.5), marker=dict(color=PURPLE, size=6),
+            fill="tozeroy", fillcolor="rgba(123,123,255,0.1)",
         ))
         fig_trend.update_layout(
-            paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor=CARD,
-            font=dict(color=TEXT, size=10),
-            height=300,
+            paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor=CARD,
+            font=dict(color=TEXT, size=10), height=300,
             margin=dict(l=10, r=10, t=10, b=10),
-            xaxis=dict(showgrid=True, gridcolor=GRID, color=MUTED, zeroline=False,
-                       tickfont=dict(size=10)),
-            yaxis=dict(showgrid=True, gridcolor=GRID, color=MUTED, zeroline=False,
-                       tickprefix="A$ ", tickfont=dict(size=10)),
-            showlegend=False,
-            hovermode="x unified",
+            xaxis=dict(showgrid=True, gridcolor=GRID, color=MUTED, zeroline=False, tickfont=dict(size=10)),
+            yaxis=dict(showgrid=True, gridcolor=GRID, color=MUTED, zeroline=False, tickprefix="A$ ", tickfont=dict(size=10)),
+            showlegend=False, hovermode="x unified",
         )
         with st.container():
             st.markdown(f"""
@@ -657,33 +394,25 @@ with col_trend:
 
 st.markdown("<div style='height:0.75rem'></div>", unsafe_allow_html=True)
 
-
-# ══════════════════════════════════════════════════════════════════════════════
-# BOTTOM ROW — Staff performance table + Appointments
-# ══════════════════════════════════════════════════════════════════════════════
 col_staff, col_appts = st.columns([3, 2])
 
 with col_staff:
-    has_occ  = any(s.get("occupancy_pct") for s in staff_list)
-    occ_th   = '<th class="r">Occupancy</th>' if has_occ else ""
-
+    has_occ = any(s.get("occupancy_pct") for s in staff_list)
+    occ_th  = '<th class="r">Occupancy</th>' if has_occ else ""
     rows = ""
     for i, s in enumerate(sorted_staff, 1):
         occ_td = f"<td class='r'>{occ_badge(s.get('occupancy_pct', 0))}</td>" if has_occ else ""
         rows += (
-            f"<tr>"
-            f"<td>{rank_pill(i)}</td>"
-            f"<td style='font-weight:600;'>{s.get('name', '—')}</td>"
+            f"<tr><td>{rank_pill(i)}</td>"
+            f"<td style='font-weight:600;'>{s.get('name','—')}</td>"
             f"<td class='r' style='color:{PURPLE};font-weight:700;'>{c(s.get('total_sales'))}</td>"
             f"<td class='r'>{c(s.get('services'))}</td>"
             f"<td class='r'>{c(s.get('products'))}</td>"
             f"<td class='r'>{c(s.get('tips'))}</td>"
             f"<td class='r'>{n(s.get('total_appts'))}</td>"
             f"<td class='r' style='color:{RED_FG};'>{n(s.get('cancelled_appts'))}</td>"
-            f"{occ_td}"
-            f"</tr>"
+            f"{occ_td}</tr>"
         )
-
     st.markdown(f"""
     <div class="db-card">
         <div class="db-card-header">
@@ -693,15 +422,9 @@ with col_staff:
         <div class="table-wrap">
         <table class="staff-table">
             <thead><tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th class="r">Total</th>
-                <th class="r">Services</th>
-                <th class="r">Products</th>
-                <th class="r">Tips</th>
-                <th class="r">Appts</th>
-                <th class="r">Cancelled</th>
-                {occ_th}
+                <th>Rank</th><th>Name</th><th class="r">Total</th>
+                <th class="r">Services</th><th class="r">Products</th><th class="r">Tips</th>
+                <th class="r">Appts</th><th class="r">Cancelled</th>{occ_th}
             </tr></thead>
             <tbody>{rows}</tbody>
         </table>
@@ -720,10 +443,7 @@ with col_appts:
         <div style="margin-bottom:0.9rem;">
             <span class="chg-pill flat">{pct(appts.get("pct_online"))} online</span>
         </div>
-        <div class="bd-row">
-            <span class="bd-label">Total appointments</span>
-            <span class="bd-value">{n(appts.get("total"))}</span>
-        </div>
+        <div class="bd-row"><span class="bd-label">Total appointments</span><span class="bd-value">{n(appts.get("total"))}</span></div>
         <div class="bd-row">
             <span class="bd-label">Online bookings</span>
             <span style="display:flex;align-items:center;gap:0.4rem;">
@@ -731,10 +451,7 @@ with col_appts:
                 <span class="chg-pill up">↑ {pct(appts.get("pct_online"))}</span>
             </span>
         </div>
-        <div class="bd-row">
-            <span class="bd-label">Walk-ins / offline</span>
-            <span class="bd-value">{n(appts.get("offline"))}</span>
-        </div>
+        <div class="bd-row"><span class="bd-label">Walk-ins / offline</span><span class="bd-value">{n(appts.get("offline"))}</span></div>
         <div class="bd-row">
             <span class="bd-label">Cancelled</span>
             <span style="display:flex;align-items:center;gap:0.4rem;">
@@ -752,7 +469,6 @@ with col_appts:
     </div>
     """, unsafe_allow_html=True)
 
-# ── Footer ─────────────────────────────────────────────────────────────────────
 st.markdown(
     f"<div style='text-align:center;color:{BORDER};font-size:0.68rem;padding:1.5rem 0 0.5rem;'>"
     "Diamond Barbers  ·  Auto-refreshes every 5 min  ·  Updated every Monday 6:00 AM Darwin time"
