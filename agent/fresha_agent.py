@@ -1,8 +1,7 @@
 import asyncio
 import os
 import json
-import traceback
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import anthropic
@@ -15,7 +14,6 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 DATA_DIR.mkdir(exist_ok=True)
 
 SESSION_FILE = DATA_DIR / "session.json"
-
 
 async def download_csv(email, password):
     csv_path = None
@@ -102,7 +100,6 @@ async def download_csv(email, password):
                 await page.goto("https://partners.fresha.com/reports", wait_until="networkidle")
                 await page.wait_for_timeout(3000)
 
-            from datetime import timedelta
             today = datetime.now()
             days_since_monday = today.weekday()
             last_monday = today - timedelta(days=days_since_monday + 7)
@@ -139,8 +136,7 @@ async def download_csv(email, password):
             await browser.close()
     return csv_path
 
-
-def extract_data_from_csv(csv_path, api_key):
+def extract_data_from_csv(csv_path, api_key, date_from=None, date_to=None):
     with open(csv_path, "r", encoding="utf-8-sig") as f:
         csv_content = f.read()
 
@@ -179,13 +175,24 @@ CSV DATA:
     raw = message.content[0].text
     start = raw.find("{")
     end = raw.rfind("}") + 1
-    return json.loads(raw[start:end])
-
+    result = json.loads(raw[start:end])
+    if date_from:
+        result["period_start"] = date_from
+    if date_to:
+        result["period_end"] = date_to
+    return result
 
 async def run():
     email = os.environ["FRESHA_EMAIL"]
     password = os.environ["FRESHA_PASSWORD"]
     api_key = os.environ["ANTHROPIC_API_KEY"]
+
+    today = datetime.now()
+    days_since_monday = today.weekday()
+    last_monday = today - timedelta(days=days_since_monday + 7)
+    last_sunday = last_monday + timedelta(days=6)
+    date_from = last_monday.strftime("%Y-%m-%d")
+    date_to = last_sunday.strftime("%Y-%m-%d")
 
     print(f"[{datetime.now()}] Starting Fresha data extraction...")
     csv_path = await download_csv(email, password)
@@ -196,12 +203,13 @@ async def run():
     else:
         print(f"[{datetime.now()}] Extracting data from CSV using Claude...")
         try:
-            data = extract_data_from_csv(csv_path, api_key)
+            data = extract_data_from_csv(csv_path, api_key, date_from, date_to)
             data["report_type"] = "performance_summary"
             print("Data extracted successfully.")
         except Exception as e:
-            traceback.print_exc()
+            import traceback
             print(f"ERROR extracting data: {e}")
+            traceback.print_exc()
             data = {"error": str(e)}
 
     data["report_date"] = datetime.now().strftime("%Y-%m-%d")
@@ -222,7 +230,6 @@ async def run():
 
     print(f"[{datetime.now()}] Saved to {output_file}")
     print(json.dumps(data, indent=2))
-
 
 if __name__ == "__main__":
     asyncio.run(run())
