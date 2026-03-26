@@ -578,7 +578,7 @@ if occ_vals:
             text="Occupancy rate",
             font=dict(color=TEXT, size=14),
             x=0.01, xanchor="left",
-            y=0.99, yanchor="top",
+            y=0.93, yanchor="top",
         ),
         xaxis=dict(
             range=[0, 100],
@@ -590,7 +590,7 @@ if occ_vals:
         margin=dict(l=120, r=20, t=70, b=20),
         bargap=0.3,
         annotations=[
-            dict(xref="paper", yref="paper", x=0.99, y=1.08,
+            dict(xref="paper", yref="paper", x=0.99, y=0.97,
                  text=period_label, showarrow=False,
                  font=dict(size=11, color=MUTED), xanchor="right"),
         ],
