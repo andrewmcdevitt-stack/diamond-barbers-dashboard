@@ -24,7 +24,6 @@ async def download_csv(email, password):
         headless = os.environ.get("CI", "false").lower() == "true"
         browser = await p.chromium.launch(headless=headless)
 
-        # Load saved session if it exists (skips login + 2FA)
         if SESSION_FILE.exists():
             print("Loading saved session...")
             context = await browser.new_context(
@@ -120,7 +119,7 @@ async def download_csv(email, password):
             await page.locator('select:has(option[value="last_week"])').select_option(value="last_week")
             await page.wait_for_timeout(1000)
 
-            # Step 3: Click Apply if present
+            # Step 3: Click Apply
             print("Clicking Apply...")
             try:
                 await page.get_by_role("button", name="Apply").click(timeout=5000)
@@ -133,12 +132,18 @@ async def download_csv(email, password):
             await page.wait_for_timeout(10000)
             print(f"Final URL: {page.url}")
 
-            # Take a screenshot so we can verify the data on screen matches what we download
+            # Reload the page using the confirmed URL so the CSV export uses the correct dates
+            confirmed_url = page.url
+            print(f"Reloading confirmed URL to refresh CSV export: {confirmed_url}")
+            await page.goto(confirmed_url, wait_until="networkidle")
+            await page.wait_for_timeout(8000)
+
+            # Take a screenshot to verify correct data is on screen before downloading
             pre_download_screenshot = str(DATA_DIR / "pre_download.png")
             await page.screenshot(path=pre_download_screenshot)
             print(f"Pre-download screenshot saved to {pre_download_screenshot}")
 
-            # Grab dates from the URL for the JSON record
+            # Grab dates from the URL
             from urllib.parse import urlparse, parse_qs
             from datetime import timedelta, timezone
             parsed = urlparse(page.url)
