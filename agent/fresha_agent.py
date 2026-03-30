@@ -114,33 +114,50 @@ async def download_csv(email, password):
                 await page.goto("https://partners.fresha.com/reports", wait_until="networkidle")
                 await page.wait_for_timeout(3000)
 
-            # Calculate last week Monday–Sunday in Darwin time (UTC+9:30)
-            from datetime import timedelta, timezone
-            DARWIN_TZ = timezone(timedelta(hours=9, minutes=30))
-            today = datetime.now(DARWIN_TZ)
-            days_since_monday = today.weekday()
-            last_monday = today - timedelta(days=days_since_monday + 7)
-            last_sunday = last_monday + timedelta(days=6)
-            date_from = last_monday.strftime("%Y-%m-%d")
-            date_to = last_sunday.strftime("%Y-%m-%d")
-            print(f"Calculated date range: {date_from} → {date_to}")
-
-            # Navigate to reports landing page first to reset SPA state
-            print("Resetting SPA state via reports landing page...")
+            # Step 1: Go to Reports landing page
+            print("Navigating to Reports...")
             await page.goto("https://partners.fresha.com/reports", wait_until="networkidle")
-            await page.wait_for_timeout(2000)
-
-            # Now navigate to Performance Summary with explicit dates
-            report_url = f"https://partners.fresha.com/reports/table/performance-summary?dateFrom={date_from}&dateTo={date_to}"
-            print(f"Navigating to: {report_url}")
-            await page.goto(report_url, wait_until="networkidle")
             await page.wait_for_timeout(3000)
 
-            # Reload to ensure the URL date params take effect (not cached session state)
-            print("Reloading to clear cached state...")
-            await page.reload(wait_until="networkidle")
-            await page.wait_for_timeout(5000)
+            # Step 2: Click "Performance Summary" from the reports list
+            print("Clicking Performance Summary...")
+            await page.get_by_text("Performance Summary", exact=True).click(timeout=10000)
+            await page.wait_for_load_state("networkidle")
+            await page.wait_for_timeout(3000)
+            print(f"Performance Summary URL: {page.url}")
+
+            # Step 3: Click the date range button (shows "Month to date" by default)
+            print("Clicking date range picker (Month to date)...")
+            await page.get_by_text("Month to date", exact=True).click(timeout=10000)
+            await page.wait_for_timeout(1000)
+
+            # Step 4: Select "Last week"
+            print("Selecting Last week...")
+            await page.get_by_text("Last week", exact=True).click(timeout=10000)
+            await page.wait_for_load_state("networkidle")
+            await page.wait_for_timeout(4000)
             print(f"Final URL: {page.url}")
+
+            # Grab dates from the URL for the JSON record
+            from urllib.parse import urlparse, parse_qs
+            from datetime import timedelta, timezone
+            parsed = urlparse(page.url)
+            params = parse_qs(parsed.query)
+            date_from = params.get("dateFrom", [None])[0]
+            date_to = params.get("dateTo", [None])[0]
+            print(f"Date range from URL: {date_from} → {date_to}")
+
+            # Fallback to Darwin timezone calculation if URL doesn't include dates
+            if not date_from or not date_to:
+                print("URL has no dates — using Darwin timezone fallback.")
+                DARWIN_TZ = timezone(timedelta(hours=9, minutes=30))
+                today = datetime.now(DARWIN_TZ)
+                days_since_monday = today.weekday()
+                last_monday = today - timedelta(days=days_since_monday + 7)
+                last_sunday = last_monday + timedelta(days=6)
+                date_from = last_monday.strftime("%Y-%m-%d")
+                date_to = last_sunday.strftime("%Y-%m-%d")
+                print(f"Fallback date range: {date_from} → {date_to}")
 
             print("Downloading CSV...")
             async with page.expect_download(timeout=30000) as download_info:
