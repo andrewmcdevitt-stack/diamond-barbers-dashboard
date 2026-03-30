@@ -3038,5 +3038,9 @@
     ],
     "report_type": "performance_summary",
     "report_date": "2026-03-30"
+  },
+  {
+    "error": "CSV download failed",
+    "report_date": "2026-03-30"
   }
 ]
