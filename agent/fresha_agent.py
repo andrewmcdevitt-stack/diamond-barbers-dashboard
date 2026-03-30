@@ -303,15 +303,35 @@ CSV DATA:
     if date_to:
         result["period_end"] = date_to
 
-    # Override sales_summary totals by summing individual staff rows in Python.
+    # Recalculate everything from individual staff rows in Python.
     # Claude consistently reads the cached Total row — this ensures correct values.
     staff = result.get("staff", [])
     if staff:
-        result["sales_summary"]["services"]   = round(sum(s.get("services",   0) for s in staff), 2)
-        result["sales_summary"]["products"]   = round(sum(s.get("products",   0) for s in staff), 2)
-        result["sales_summary"]["tips"]       = round(sum(s.get("tips",       0) for s in staff), 2)
-        result["sales_summary"]["total_sales"]= round(sum(s.get("total_sales",0) for s in staff), 2)
-        print(f"Recalculated from staff rows: services={result['sales_summary']['services']}, products={result['sales_summary']['products']}, tips={result['sales_summary']['tips']}, total_sales={result['sales_summary']['total_sales']}")
+        services    = round(sum(s.get("services",    0) for s in staff), 2)
+        products    = round(sum(s.get("products",    0) for s in staff), 2)
+        tips        = round(sum(s.get("tips",        0) for s in staff), 2)
+        total_sales = round(sum(s.get("total_sales", 0) for s in staff), 2)
+        services_sold = sum(s.get("services_sold", 0) for s in staff)
+        total_appts   = sum(s.get("total_appts",   0) for s in staff)
+        cancelled     = sum(s.get("cancelled_appts",0) for s in staff)
+        no_shows      = sum(s.get("no_show_appts",  0) for s in staff)
+
+        result["sales_summary"]["services"]    = services
+        result["sales_summary"]["products"]    = products
+        result["sales_summary"]["tips"]        = tips
+        result["sales_summary"]["total_sales"] = total_sales
+
+        result["sales_performance"]["services_sold"]    = services_sold
+        result["sales_performance"]["avg_service_value"]= round(services / services_sold, 2) if services_sold else 0
+        result["sales_performance"]["products_sold"]    = sum(s.get("products_sold", result["sales_performance"].get("products_sold", 0)) for s in staff) if any("products_sold" in s for s in staff) else result["sales_performance"].get("products_sold", 0)
+
+        result["appointments"]["total"]         = total_appts
+        result["appointments"]["cancelled"]     = cancelled
+        result["appointments"]["no_shows"]      = no_shows
+        result["appointments"]["pct_cancelled"] = round(cancelled / total_appts * 100, 2) if total_appts else 0
+        result["appointments"]["pct_no_show"]   = round(no_shows  / total_appts * 100, 2) if total_appts else 0
+
+        print(f"Recalculated: services={services}, products={products}, tips={tips}, total_sales={total_sales}, services_sold={services_sold}, avg_svc={result['sales_performance']['avg_service_value']}")
 
     return result
 
