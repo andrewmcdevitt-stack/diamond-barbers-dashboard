@@ -41,17 +41,14 @@ async def download_csv(email, password):
 
         page = await context.new_page()
         try:
-            # Try going directly to reports first (works if session is valid)
             print("Going to reports page...")
             await page.goto("https://partners.fresha.com/reports", wait_until="networkidle")
             await page.wait_for_timeout(3000)
 
-            # If redirected to sign-in, session expired — do full login
             if "/users/sign-in" in page.url:
                 print("Session expired or not found. Logging in...")
                 SESSION_FILE.unlink(missing_ok=True)
 
-                # Dismiss cookie banner if present
                 try:
                     await page.get_by_role("button", name="Accept all").click(timeout=5000)
                     print("Dismissed cookie banner.")
@@ -59,7 +56,6 @@ async def download_csv(email, password):
                 except Exception:
                     pass
 
-                # Enter email
                 print("Entering email...")
                 email_field = page.locator('input[placeholder="Enter your email address"]')
                 await email_field.wait_for(timeout=10000)
@@ -67,19 +63,16 @@ async def download_csv(email, password):
                 await email_field.type(email, delay=50)
                 await page.wait_for_timeout(1000)
 
-                # Click Continue
                 print("Clicking Continue...")
                 await page.click('[data-qa="continue"]', force=True)
                 await page.wait_for_selector('input[type="password"]:not([tabindex="-1"])', timeout=15000)
                 await page.wait_for_timeout(1000)
 
-                # Enter password
                 print("Entering password...")
                 pwd_field = page.locator('input[type="password"]:not([tabindex="-1"])')
                 await pwd_field.fill(password)
                 await page.wait_for_timeout(1000)
 
-                # Submit
                 print("Submitting login...")
                 try:
                     await page.locator('button[type="submit"]').click(force=True, timeout=5000)
@@ -89,7 +82,6 @@ async def download_csv(email, password):
                     except Exception:
                         await page.keyboard.press("Enter")
 
-                # Wait up to 5 minutes — enter 2FA code in the browser if prompted
                 print("==============================================")
                 print("CHECK THE BROWSER WINDOW NOW.")
                 print("Enter the 2FA code sent to your phone.")
@@ -106,11 +98,9 @@ async def download_csv(email, password):
                 if "/users/sign-in" in page.url:
                     raise Exception("Login failed after 5 minutes.")
 
-                # Save session so next run skips login
                 await context.storage_state(path=str(SESSION_FILE))
                 print("Session saved. Future runs will skip login and 2FA.")
 
-                # Now go to reports
                 await page.goto("https://partners.fresha.com/reports", wait_until="networkidle")
                 await page.wait_for_timeout(3000)
 
@@ -138,9 +128,15 @@ async def download_csv(email, password):
             except Exception:
                 print("No Apply button found — continuing.")
 
+            # Wait for Fresha to reload data for the new date range
             await page.wait_for_load_state("networkidle")
-            await page.wait_for_timeout(4000)
+            await page.wait_for_timeout(10000)
             print(f"Final URL: {page.url}")
+
+            # Take a screenshot so we can verify the data on screen matches what we download
+            pre_download_screenshot = str(DATA_DIR / "pre_download.png")
+            await page.screenshot(path=pre_download_screenshot)
+            print(f"Pre-download screenshot saved to {pre_download_screenshot}")
 
             # Grab dates from the URL for the JSON record
             from urllib.parse import urlparse, parse_qs
@@ -174,7 +170,6 @@ async def download_csv(email, password):
             await download.save_as(csv_path)
             print(f"CSV saved to: {csv_path}")
 
-            # Always save the refreshed session after a successful run
             await context.storage_state(path=str(SESSION_FILE))
             print("Session refreshed and saved.")
 
