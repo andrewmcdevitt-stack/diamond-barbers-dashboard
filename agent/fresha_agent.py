@@ -256,3 +256,148 @@ def extract_data_from_csv(csv_path, api_key, date_from=None, date_to=None):
 
     client = anthropic.Anthropic(api_key=api_key)
     message = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=4096,
+        messages=[{"role": "user", "content": f"""This is a CSV export from Fresha's Performance Summary report (grouped by Team member) for last week.
+
+CRITICAL RULES:
+1. The CSV contains a "Total" or summary row — IGNORE IT COMPLETELY. Do not use any row labelled "Total".
+2. Extract ONLY individual named staff members (expect ~20 or more people).
+3. For all sales_summary fields (services, products, tips, etc.) — SUM the values from all individual staff rows. Do NOT copy from the Total row.
+4. Include EVERY named staff member in the staff array, even if they have zero sales.
+
+Return ONLY a valid JSON object in this exact structure:
+{{
+  "period_start": "YYYY-MM-DD",
+  "period_end": "YYYY-MM-DD",
+  "sales_summary": {{
+    "services": 0.00, "service_addons": 0.00, "products": 0.00,
+    "memberships": 0.00, "late_cancellation_fees": 0.00, "no_show_fees": 0.00,
+    "total_sales": 0.00, "service_charges": 0.00, "tips": 0.00, "total_sales_and_other": 0.00
+  }},
+  "appointments": {{
+    "total": 0, "online": 0, "offline": 0, "cancelled": 0, "no_shows": 0,
+    "pct_online": 0.0, "pct_cancelled": 0.0, "pct_no_show": 0.0
+  }},
+  "sales_performance": {{
+    "services_sold": 0, "avg_service_value": 0.00, "products_sold": 0, "avg_product_value": 0.00
+  }},
+  "upsell": {{"total": 0.00, "pct": 0.0}},
+  "staff": [{{
+    "name": "Staff Name", "services": 0.00, "products": 0.00,
+    "total_sales": 0.00, "tips": 0.00, "total_appts": 0,
+    "cancelled_appts": 0, "no_show_appts": 0, "services_sold": 0,
+    "occupancy_pct": 0.0
+  }}]
+}}
+Rules: Return ONLY the JSON. All monetary values as plain numbers. occupancy_pct is the "% Occupancy" column as a percentage number (e.g. 72.5 not 0.725).
+CSV DATA:
+{csv_content}"""}]
+    )
+    raw = message.content[0].text
+    start = raw.find("{")
+    end = raw.rfind("}") + 1
+    result = json.loads(raw[start:end])
+    if date_from:
+        result["period_start"] = date_from
+    if date_to:
+        result["period_end"] = date_to
+    return result
+
+
+def extract_location_data_from_csv(csv_path, api_key):
+    with open(csv_path, "r", encoding="utf-8-sig") as f:
+        csv_content = f.read()
+
+    print("=== FIRST 1000 CHARS OF LOCATION CSV ===")
+    print(csv_content[:1000])
+    print("=== END LOCATION CSV PREVIEW ===")
+
+    client = anthropic.Anthropic(api_key=api_key)
+    message = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=2048,
+        messages=[{"role": "user", "content": f"""This is a CSV export from Fresha's Performance Summary report grouped by Location.
+
+CRITICAL: Ignore any "Total" or summary rows. Extract ONLY individual named locations.
+
+Return ONLY a valid JSON array like this:
+[
+  {{
+    "name": "Location Name",
+    "services": 0.00,
+    "products": 0.00,
+    "total_sales": 0.00,
+    "tips": 0.00,
+    "total_appts": 0,
+    "occupancy_pct": 0.0
+  }}
+]
+
+Rules: Return ONLY the JSON array. All monetary values as plain numbers. occupancy_pct as a percentage (e.g. 72.5 not 0.725).
+CSV DATA:
+{csv_content}"""}]
+    )
+    raw = message.content[0].text
+    start = raw.find("[")
+    end = raw.rfind("]") + 1
+    return json.loads(raw[start:end])
+
+
+async def run():
+    email = os.environ["FRESHA_EMAIL"]
+    password = os.environ["FRESHA_PASSWORD"]
+    api_key = os.environ["ANTHROPIC_API_KEY"]
+
+    print(f"[{datetime.now()}] Starting Fresha data extraction...")
+    csv_path, location_csv_path, date_from, date_to = await download_csvs(email, password)
+
+    if not csv_path or not Path(csv_path).exists():
+        print("ERROR: CSV was not downloaded.")
+        data = {"error": "CSV download failed"}
+    else:
+        print(f"[{datetime.now()}] Extracting staff data from CSV using Claude...")
+        try:
+            data = extract_data_from_csv(csv_path, api_key, date_from, date_to)
+            data["report_type"] = "performance_summary"
+            print("Staff data extracted successfully.")
+        except Exception as e:
+            import traceback
+            print(f"ERROR extracting data: {e}")
+            traceback.print_exc()
+            data = {"error": str(e)}
+
+    # Extract location data if available
+    if location_csv_path and Path(location_csv_path).exists():
+        print(f"[{datetime.now()}] Extracting location data from CSV using Claude...")
+        try:
+            locations = extract_location_data_from_csv(location_csv_path, api_key)
+            data["locations"] = locations
+            print(f"Location data extracted: {len(locations)} locations.")
+        except Exception as e:
+            import traceback
+            print(f"WARNING: Could not extract location data: {e}")
+            traceback.print_exc()
+
+    data["report_date"] = datetime.now().strftime("%Y-%m-%d")
+
+    output_file = DATA_DIR / "performance_summary.json"
+    if output_file.exists():
+        with open(output_file, "r") as f:
+            history = json.load(f)
+        if not isinstance(history, list):
+            history = [history]
+    else:
+        history = []
+
+    history.append(data)
+
+    with open(output_file, "w") as f:
+        json.dump(history, f, indent=2)
+
+    print(f"[{datetime.now()}] Saved to {output_file}")
+    print(json.dumps(data, indent=2))
+
+
+if __name__ == "__main__":
+    asyncio.run(run())
