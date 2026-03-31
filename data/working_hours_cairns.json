@@ -1,0 +1,350 @@
+{
+  "summary": {
+    "Alex Khaq": {
+      "weekday_hrs": 29.0,
+      "saturday_hrs": 9.0,
+      "sunday_hrs": 5.0,
+      "total_hrs": 43.0
+    },
+    "Alfon Amora": {
+      "weekday_hrs": 32.08,
+      "saturday_hrs": 9.0,
+      "sunday_hrs": 5.0,
+      "total_hrs": 46.08
+    },
+    "Andrea Palma": {
+      "weekday_hrs": 27.0,
+      "saturday_hrs": 8.0,
+      "sunday_hrs": 5.0,
+      "total_hrs": 40.0
+    },
+    "Ashleigh Campbell alexis": {
+      "weekday_hrs": 13.0,
+      "saturday_hrs": 9.0,
+      "sunday_hrs": 0.0,
+      "total_hrs": 22.0
+    },
+    "Bailey Wosomo": {
+      "weekday_hrs": 20.0,
+      "saturday_hrs": 0.0,
+      "sunday_hrs": 0.0,
+      "total_hrs": 20.0
+    },
+    "Brazil Lamsen": {
+      "weekday_hrs": 39.0,
+      "saturday_hrs": 9.0,
+      "sunday_hrs": 5.0,
+      "total_hrs": 53.0
+    },
+    "Dipen Magar": {
+      "weekday_hrs": 7.83,
+      "saturday_hrs": 0.0,
+      "sunday_hrs": 0.0,
+      "total_hrs": 7.83
+    },
+    "Di\u2019on Mataele": {
+      "weekday_hrs": 8.0,
+      "saturday_hrs": 0.0,
+      "sunday_hrs": 5.0,
+      "total_hrs": 13.0
+    },
+    "Ethan \ud83c\uddee\ud83c\uddea": {
+      "weekday_hrs": 34.0,
+      "saturday_hrs": 9.0,
+      "sunday_hrs": 0.0,
+      "total_hrs": 43.0
+    },
+    "Jack William Bastock": {
+      "weekday_hrs": 23.0,
+      "saturday_hrs": 9.0,
+      "sunday_hrs": 0.0,
+      "total_hrs": 32.0
+    },
+    "Jerry Guevarra": {
+      "weekday_hrs": 30.5,
+      "saturday_hrs": 7.0,
+      "sunday_hrs": 9.0,
+      "total_hrs": 46.5
+    },
+    "Luca Perrone": {
+      "weekday_hrs": 27.0,
+      "saturday_hrs": 7.0,
+      "sunday_hrs": 5.0,
+      "total_hrs": 39.0
+    },
+    "Michael Dobbs": {
+      "weekday_hrs": 28.75,
+      "saturday_hrs": 9.0,
+      "sunday_hrs": 0.0,
+      "total_hrs": 37.75
+    },
+    "Nelson Diwa": {
+      "weekday_hrs": 31.5,
+      "saturday_hrs": 9.0,
+      "sunday_hrs": 5.0,
+      "total_hrs": 45.5
+    }
+  },
+  "by_location": {
+    "Diamond Barbers Wulguru": {
+      "employees": [
+        {
+          "id": "4993074",
+          "name": "Jack William Bastock"
+        },
+        {
+          "id": "4861988",
+          "name": "Bailey Wosomo"
+        },
+        {
+          "id": "3340508",
+          "name": "Brazil Lamsen"
+        },
+        {
+          "id": "3340507",
+          "name": "Alfon Amora"
+        },
+        {
+          "id": "3340504",
+          "name": "Nelson Diwa"
+        },
+        {
+          "id": "3313059",
+          "name": "Nico Diamantis"
+        }
+      ],
+      "hours": {
+        "4993074": {
+          "weekday_hrs": 0.0,
+          "saturday_hrs": 0.0,
+          "sunday_hrs": 0.0,
+          "total_hrs": 0.0
+        },
+        "4861988": {
+          "weekday_hrs": 0.0,
+          "saturday_hrs": 0.0,
+          "sunday_hrs": 0.0,
+          "total_hrs": 0.0
+        },
+        "3340508": {
+          "weekday_hrs": 39.0,
+          "saturday_hrs": 9.0,
+          "sunday_hrs": 5.0,
+          "total_hrs": 53.0
+        },
+        "3340507": {
+          "weekday_hrs": 9.0,
+          "saturday_hrs": 0.0,
+          "sunday_hrs": 0.0,
+          "total_hrs": 9.0
+        },
+        "3340504": {
+          "weekday_hrs": 0.0,
+          "saturday_hrs": 0.0,
+          "sunday_hrs": 0.0,
+          "total_hrs": 0.0
+        },
+        "3313059": {
+          "weekday_hrs": 0.0,
+          "saturday_hrs": 0.0,
+          "sunday_hrs": 0.0,
+          "total_hrs": 0.0
+        }
+      }
+    },
+    "Diamond Barbers Rising Sun": {
+      "employees": [
+        {
+          "id": "4993074",
+          "name": "Jack William Bastock"
+        },
+        {
+          "id": "4861988",
+          "name": "Bailey Wosomo"
+        },
+        {
+          "id": "4623420",
+          "name": "Di\u2019on Mataele"
+        },
+        {
+          "id": "3340507",
+          "name": "Alfon Amora"
+        },
+        {
+          "id": "3340504",
+          "name": "Nelson Diwa"
+        },
+        {
+          "id": "3313059",
+          "name": "Nico Diamantis"
+        }
+      ],
+      "hours": {
+        "4993074": {
+          "weekday_hrs": 23.0,
+          "saturday_hrs": 9.0,
+          "sunday_hrs": 0.0,
+          "total_hrs": 32.0
+        },
+        "4861988": {
+          "weekday_hrs": 20.0,
+          "saturday_hrs": 0.0,
+          "sunday_hrs": 0.0,
+          "total_hrs": 20.0
+        },
+        "4623420": {
+          "weekday_hrs": 8.0,
+          "saturday_hrs": 0.0,
+          "sunday_hrs": 5.0,
+          "total_hrs": 13.0
+        },
+        "3340507": {
+          "weekday_hrs": 23.08,
+          "saturday_hrs": 9.0,
+          "sunday_hrs": 5.0,
+          "total_hrs": 37.08
+        },
+        "3340504": {
+          "weekday_hrs": 31.5,
+          "saturday_hrs": 9.0,
+          "sunday_hrs": 5.0,
+          "total_hrs": 45.5
+        },
+        "3313059": {
+          "weekday_hrs": 0.0,
+          "saturday_hrs": 0.0,
+          "sunday_hrs": 0.0,
+          "total_hrs": 0.0
+        }
+      }
+    },
+    "Diamond Barbers Showgrounds": {
+      "employees": [
+        {
+          "id": "5034930",
+          "name": "Luca Perrone"
+        },
+        {
+          "id": "3340510",
+          "name": "Andrea Palma"
+        },
+        {
+          "id": "4580173",
+          "name": "Michael Dobbs"
+        },
+        {
+          "id": "3340502",
+          "name": "Ethan \ud83c\uddee\ud83c\uddea"
+        },
+        {
+          "id": "3340509",
+          "name": "Jerry Guevarra"
+        }
+      ],
+      "hours": {
+        "5034930": {
+          "weekday_hrs": 27.0,
+          "saturday_hrs": 7.0,
+          "sunday_hrs": 5.0,
+          "total_hrs": 39.0
+        },
+        "3340510": {
+          "weekday_hrs": 19.0,
+          "saturday_hrs": 4.0,
+          "sunday_hrs": 5.0,
+          "total_hrs": 28.0
+        },
+        "4580173": {
+          "weekday_hrs": 28.75,
+          "saturday_hrs": 9.0,
+          "sunday_hrs": 0.0,
+          "total_hrs": 37.75
+        },
+        "3340502": {
+          "weekday_hrs": 34.0,
+          "saturday_hrs": 9.0,
+          "sunday_hrs": 0.0,
+          "total_hrs": 43.0
+        },
+        "3340509": {
+          "weekday_hrs": 0.0,
+          "saturday_hrs": 0.0,
+          "sunday_hrs": 5.0,
+          "total_hrs": 5.0
+        }
+      }
+    },
+    "Diamond Barbers Northern Beaches": {
+      "employees": [
+        {
+          "id": "3502930",
+          "name": "Ashleigh Campbell alexis"
+        },
+        {
+          "id": "3495942",
+          "name": "Alex Khaq"
+        },
+        {
+          "id": "3340509",
+          "name": "Jerry Guevarra"
+        }
+      ],
+      "hours": {
+        "3502930": {
+          "weekday_hrs": 13.0,
+          "saturday_hrs": 9.0,
+          "sunday_hrs": 0.0,
+          "total_hrs": 22.0
+        },
+        "3495942": {
+          "weekday_hrs": 29.0,
+          "saturday_hrs": 9.0,
+          "sunday_hrs": 5.0,
+          "total_hrs": 43.0
+        },
+        "3340509": {
+          "weekday_hrs": 26.5,
+          "saturday_hrs": 7.0,
+          "sunday_hrs": 0.0,
+          "total_hrs": 33.5
+        }
+      }
+    },
+    "Diamond Barbers Night Markets": {
+      "employees": [
+        {
+          "id": "3340510",
+          "name": "Andrea Palma"
+        },
+        {
+          "id": "3460774",
+          "name": "Dipen Magar"
+        },
+        {
+          "id": "3340509",
+          "name": "Jerry Guevarra"
+        }
+      ],
+      "hours": {
+        "3340510": {
+          "weekday_hrs": 8.0,
+          "saturday_hrs": 4.0,
+          "sunday_hrs": 0.0,
+          "total_hrs": 12.0
+        },
+        "3460774": {
+          "weekday_hrs": 7.83,
+          "saturday_hrs": 0.0,
+          "sunday_hrs": 0.0,
+          "total_hrs": 7.83
+        },
+        "3340509": {
+          "weekday_hrs": 4.0,
+          "saturday_hrs": 0.0,
+          "sunday_hrs": 4.0,
+          "total_hrs": 8.0
+        }
+      }
+    }
+  }
+}
