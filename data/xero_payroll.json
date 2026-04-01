@@ -1,0 +1,49 @@
+{
+  "generated_at": "02 Apr 2026 09:12",
+  "pay_period": "23 Mar \u2013 29 Mar 2026",
+  "locations": [
+    {
+      "org": "Diamond Barbers Pty Ltd",
+      "short_name": "Darwin CBD",
+      "pay_period_start": "2026-03-23",
+      "pay_period_end": "2026-03-29",
+      "payment_date": "2026-03-31",
+      "gross_wages": 0.0,
+      "tax": 8116.0,
+      "net_pay": 28323.61,
+      "super": 0.0,
+      "employee_count": 22
+    },
+    {
+      "org": "D.B. Parap Pty Ltd",
+      "short_name": "Parap",
+      "pay_period_start": "2026-03-23",
+      "pay_period_end": "2026-03-29",
+      "payment_date": "2026-03-31",
+      "gross_wages": 0.0,
+      "tax": 863.0,
+      "net_pay": 2480.66,
+      "super": 0.0,
+      "employee_count": 2
+    },
+    {
+      "org": "DIAMOND BARBERS CAIRNS PTY LTD",
+      "short_name": "Cairns",
+      "pay_period_start": "2026-03-23",
+      "pay_period_end": "2026-03-29",
+      "payment_date": "2026-03-31",
+      "gross_wages": 0.0,
+      "tax": 3679.0,
+      "net_pay": 15070.83,
+      "super": 0.0,
+      "employee_count": 14
+    }
+  ],
+  "totals": {
+    "gross_wages": 0.0,
+    "tax": 12658.0,
+    "net_pay": 45875.1,
+    "super": 0.0,
+    "employee_count": 38
+  }
+}
