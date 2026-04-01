@@ -57,6 +57,14 @@ jobs:
           CAIRNS_PROVIDER_ID: ${{ secrets.CAIRNS_PROVIDER_ID }}
         run: python agent/working_hours_cairns.py
 
+      - name: Send Xero payroll report
+        env:
+          XERO_CLIENT_ID: ${{ secrets.XERO_CLIENT_ID }}
+          XERO_CLIENT_SECRET: ${{ secrets.XERO_CLIENT_SECRET }}
+          EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        run: python agent/xero_payroll.py
+
       - name: Commit and push updated data
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
