@@ -1,5 +1,5 @@
 {
-  "generated_at": "02 Apr 2026 09:37",
+  "generated_at": "02 Apr 2026 10:06",
   "pay_period": "23 Mar \u2013 29 Mar 2026",
   "locations": [
     {
@@ -8,99 +8,99 @@
       "pay_period_start": "2026-03-23",
       "pay_period_end": "2026-03-29",
       "payment_date": "2026-03-31",
-      "gross_wages": 36439.61,
+      "gross_wages": 40812.36,
       "tax": 8116.0,
       "net_pay": 28323.61,
-      "super": 4190.56,
+      "super": 4372.75,
       "employee_count": 22,
       "employees": [
         {
           "name": "Abuel Basallo",
-          "net_pay": 1324.27
+          "gross": 1908.18
         },
         {
           "name": "Ahmet Koysu",
-          "net_pay": 0.0
+          "gross": 0.0
         },
         {
           "name": "Airol Basallo",
-          "net_pay": 1597.25
+          "gross": 2301.53
         },
         {
           "name": "Andrea Palma",
-          "net_pay": 1091.79
+          "gross": 1573.19
         },
         {
           "name": "Andrew  Mcdevitt",
-          "net_pay": 1222.43
+          "gross": 1761.44
         },
         {
           "name": "Anthony  Crispo",
-          "net_pay": 1642.65
+          "gross": 2366.95
         },
         {
           "name": "Avinash Borade",
-          "net_pay": 1502.29
+          "gross": 2164.7
         },
         {
           "name": "Brazil Lamsen",
-          "net_pay": 1922.24
+          "gross": 2769.81
         },
         {
           "name": "David Garcia",
-          "net_pay": 1310.35
+          "gross": 1888.12
         },
         {
           "name": "Jack Matthew",
-          "net_pay": 1142.94
+          "gross": 1646.9
         },
         {
           "name": "Jairo Espinosa Mejia",
-          "net_pay": 1273.33
+          "gross": 1834.78
         },
         {
           "name": "Jamaine McGee",
-          "net_pay": 826.32
+          "gross": 1190.67
         },
         {
           "name": "JoJo Aligam",
-          "net_pay": 1323.4
+          "gross": 1906.93
         },
         {
           "name": "John Zagorianos",
-          "net_pay": 1185.29
+          "gross": 1707.92
         },
         {
           "name": "Laura Marshall",
-          "net_pay": 1154.85
+          "gross": 1664.06
         },
         {
           "name": "Liem Nguyen",
-          "net_pay": 1332.25
+          "gross": 1919.68
         },
         {
           "name": "Luca Marzocchi",
-          "net_pay": 1312.71
+          "gross": 1891.52
         },
         {
           "name": "Marianne Escobar",
-          "net_pay": 1416.06
+          "gross": 2040.44
         },
         {
           "name": "Robert Jugan",
-          "net_pay": 1247.07
+          "gross": 1796.94
         },
         {
           "name": "Sean Maguire",
-          "net_pay": 1308.95
+          "gross": 1886.11
         },
         {
           "name": "Tam Nguyen",
-          "net_pay": 1434.59
+          "gross": 2067.14
         },
         {
           "name": "Wilfred Vidal",
-          "net_pay": 1752.58
+          "gross": 2525.35
         }
       ]
     },
@@ -110,19 +110,19 @@
       "pay_period_start": "2026-03-23",
       "pay_period_end": "2026-03-29",
       "payment_date": "2026-03-31",
-      "gross_wages": 3343.66,
+      "gross_wages": 3744.9,
       "tax": 863.0,
       "net_pay": 2480.66,
-      "super": 384.52,
+      "super": 401.24,
       "employee_count": 2,
       "employees": [
         {
           "name": "Krish Manocha",
-          "net_pay": 797.55
+          "gross": 1204.01
         },
         {
           "name": "Vincenzo Vanzanella",
-          "net_pay": 1683.11
+          "gross": 2540.89
         }
       ]
     },
@@ -132,76 +132,76 @@
       "pay_period_start": "2026-03-23",
       "pay_period_end": "2026-03-29",
       "payment_date": "2026-03-31",
-      "gross_wages": 18749.83,
+      "gross_wages": 20999.81,
       "tax": 3679.0,
       "net_pay": 15070.83,
-      "super": 2156.23,
+      "super": 2249.98,
       "employee_count": 14,
       "employees": [
         {
           "name": "Alex Khaq",
-          "net_pay": 1430.39
+          "gross": 1993.12
         },
         {
           "name": "Alfon Amora",
-          "net_pay": 1555.16
+          "gross": 2166.97
         },
         {
           "name": "Ashleigh Campbell",
-          "net_pay": 512.46
+          "gross": 714.07
         },
         {
           "name": "Bailey Wosomo",
-          "net_pay": 302.6
+          "gross": 421.65
         },
         {
           "name": "Dion Mataele",
-          "net_pay": 540.2
+          "gross": 752.72
         },
         {
           "name": "Dipen Magar",
-          "net_pay": 277.43
+          "gross": 386.57
         },
         {
           "name": "Ethan Byrne",
-          "net_pay": 1263.51
+          "gross": 1760.58
         },
         {
           "name": "Jack Bastock",
-          "net_pay": 999.35
+          "gross": 1392.5
         },
         {
           "name": "Jerry Guevarra",
-          "net_pay": 1840.37
+          "gross": 2564.39
         },
         {
           "name": "Luca Perrone",
-          "net_pay": 1427.61
+          "gross": 1989.24
         },
         {
           "name": "Michael Dobbs",
-          "net_pay": 689.21
+          "gross": 960.35
         },
         {
           "name": "Nelson Diwa",
-          "net_pay": 1525.0
+          "gross": 2124.95
         },
         {
           "name": "Nicole Diamantis",
-          "net_pay": 1353.77
+          "gross": 1886.35
         },
         {
           "name": "Nikolaos Diamantis",
-          "net_pay": 1353.77
+          "gross": 1886.35
         }
       ]
     }
   ],
   "totals": {
-    "gross_wages": 58533.1,
+    "gross_wages": 65557.07,
     "tax": 12658.0,
     "net_pay": 45875.1,
-    "super": 6731.31,
+    "super": 7023.97,
     "employee_count": 38
   }
 }
