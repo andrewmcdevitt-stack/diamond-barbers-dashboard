@@ -7735,5 +7735,9 @@
       }
     ],
     "report_date": "2026-04-01"
+  },
+  {
+    "error": "CSV download failed",
+    "report_date": "2026-04-02"
   }
 ]

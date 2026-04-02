@@ -1,5 +1,5 @@
 {
-  "generated_at": "02 Apr 2026 09:12",
+  "generated_at": "02 Apr 2026 09:37",
   "pay_period": "23 Mar \u2013 29 Mar 2026",
   "locations": [
     {
@@ -8,11 +8,101 @@
       "pay_period_start": "2026-03-23",
       "pay_period_end": "2026-03-29",
       "payment_date": "2026-03-31",
-      "gross_wages": 0.0,
+      "gross_wages": 36439.61,
       "tax": 8116.0,
       "net_pay": 28323.61,
-      "super": 0.0,
-      "employee_count": 22
+      "super": 4190.56,
+      "employee_count": 22,
+      "employees": [
+        {
+          "name": "Abuel Basallo",
+          "net_pay": 1324.27
+        },
+        {
+          "name": "Ahmet Koysu",
+          "net_pay": 0.0
+        },
+        {
+          "name": "Airol Basallo",
+          "net_pay": 1597.25
+        },
+        {
+          "name": "Andrea Palma",
+          "net_pay": 1091.79
+        },
+        {
+          "name": "Andrew  Mcdevitt",
+          "net_pay": 1222.43
+        },
+        {
+          "name": "Anthony  Crispo",
+          "net_pay": 1642.65
+        },
+        {
+          "name": "Avinash Borade",
+          "net_pay": 1502.29
+        },
+        {
+          "name": "Brazil Lamsen",
+          "net_pay": 1922.24
+        },
+        {
+          "name": "David Garcia",
+          "net_pay": 1310.35
+        },
+        {
+          "name": "Jack Matthew",
+          "net_pay": 1142.94
+        },
+        {
+          "name": "Jairo Espinosa Mejia",
+          "net_pay": 1273.33
+        },
+        {
+          "name": "Jamaine McGee",
+          "net_pay": 826.32
+        },
+        {
+          "name": "JoJo Aligam",
+          "net_pay": 1323.4
+        },
+        {
+          "name": "John Zagorianos",
+          "net_pay": 1185.29
+        },
+        {
+          "name": "Laura Marshall",
+          "net_pay": 1154.85
+        },
+        {
+          "name": "Liem Nguyen",
+          "net_pay": 1332.25
+        },
+        {
+          "name": "Luca Marzocchi",
+          "net_pay": 1312.71
+        },
+        {
+          "name": "Marianne Escobar",
+          "net_pay": 1416.06
+        },
+        {
+          "name": "Robert Jugan",
+          "net_pay": 1247.07
+        },
+        {
+          "name": "Sean Maguire",
+          "net_pay": 1308.95
+        },
+        {
+          "name": "Tam Nguyen",
+          "net_pay": 1434.59
+        },
+        {
+          "name": "Wilfred Vidal",
+          "net_pay": 1752.58
+        }
+      ]
     },
     {
       "org": "D.B. Parap Pty Ltd",
@@ -20,11 +110,21 @@
       "pay_period_start": "2026-03-23",
       "pay_period_end": "2026-03-29",
       "payment_date": "2026-03-31",
-      "gross_wages": 0.0,
+      "gross_wages": 3343.66,
       "tax": 863.0,
       "net_pay": 2480.66,
-      "super": 0.0,
-      "employee_count": 2
+      "super": 384.52,
+      "employee_count": 2,
+      "employees": [
+        {
+          "name": "Krish Manocha",
+          "net_pay": 797.55
+        },
+        {
+          "name": "Vincenzo Vanzanella",
+          "net_pay": 1683.11
+        }
+      ]
     },
     {
       "org": "DIAMOND BARBERS CAIRNS PTY LTD",
@@ -32,18 +132,76 @@
       "pay_period_start": "2026-03-23",
       "pay_period_end": "2026-03-29",
       "payment_date": "2026-03-31",
-      "gross_wages": 0.0,
+      "gross_wages": 18749.83,
       "tax": 3679.0,
       "net_pay": 15070.83,
-      "super": 0.0,
-      "employee_count": 14
+      "super": 2156.23,
+      "employee_count": 14,
+      "employees": [
+        {
+          "name": "Alex Khaq",
+          "net_pay": 1430.39
+        },
+        {
+          "name": "Alfon Amora",
+          "net_pay": 1555.16
+        },
+        {
+          "name": "Ashleigh Campbell",
+          "net_pay": 512.46
+        },
+        {
+          "name": "Bailey Wosomo",
+          "net_pay": 302.6
+        },
+        {
+          "name": "Dion Mataele",
+          "net_pay": 540.2
+        },
+        {
+          "name": "Dipen Magar",
+          "net_pay": 277.43
+        },
+        {
+          "name": "Ethan Byrne",
+          "net_pay": 1263.51
+        },
+        {
+          "name": "Jack Bastock",
+          "net_pay": 999.35
+        },
+        {
+          "name": "Jerry Guevarra",
+          "net_pay": 1840.37
+        },
+        {
+          "name": "Luca Perrone",
+          "net_pay": 1427.61
+        },
+        {
+          "name": "Michael Dobbs",
+          "net_pay": 689.21
+        },
+        {
+          "name": "Nelson Diwa",
+          "net_pay": 1525.0
+        },
+        {
+          "name": "Nicole Diamantis",
+          "net_pay": 1353.77
+        },
+        {
+          "name": "Nikolaos Diamantis",
+          "net_pay": 1353.77
+        }
+      ]
     }
   ],
   "totals": {
-    "gross_wages": 0.0,
+    "gross_wages": 58533.1,
     "tax": 12658.0,
     "net_pay": 45875.1,
-    "super": 0.0,
+    "super": 6731.31,
     "employee_count": 38
   }
 }
