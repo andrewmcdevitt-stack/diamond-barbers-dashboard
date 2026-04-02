@@ -1,5 +1,5 @@
 {
-  "generated_at": "02 Apr 2026 10:38",
+  "generated_at": "02 Apr 2026 13:19",
   "pay_period": "23 Mar \u2013 29 Mar 2026",
   "locations": [
     {
@@ -8,11 +8,11 @@
       "pay_period_start": "2026-03-23",
       "pay_period_end": "2026-03-29",
       "payment_date": "2026-03-31",
-      "gross_wages": 41406.01,
-      "tax": 8343.0,
-      "net_pay": 28882.03,
-      "super": 4180.98,
-      "employee_count": 23,
+      "gross_wages": 40103.47,
+      "tax": 8132.0,
+      "net_pay": 27921.58,
+      "super": 4049.89,
+      "employee_count": 22,
       "employees": [
         {
           "name": "Abuel Basallo",
@@ -34,20 +34,6 @@
           "net": 1597.25,
           "tax": 509.0,
           "super": 237.6
-        },
-        {
-          "name": "Andrea Palma",
-          "gross": 1517.96,
-          "net": 1091.79,
-          "tax": 272.0,
-          "super": 154.17
-        },
-        {
-          "name": "Andrew  Mcdevitt",
-          "gross": 1723.04,
-          "net": 1222.43,
-          "tax": 316.0,
-          "super": 184.61
         },
         {
           "name": "Anthony  Crispo",
@@ -139,6 +125,13 @@
           "net": 1416.06,
           "tax": 461.0,
           "super": 195.6
+        },
+        {
+          "name": "Nikolaos Diamantis",
+          "gross": 1938.46,
+          "net": 1353.77,
+          "tax": 377.0,
+          "super": 207.69
         },
         {
           "name": "Robert Jugan",
@@ -239,11 +232,11 @@
       "pay_period_start": "2026-03-23",
       "pay_period_end": "2026-03-29",
       "payment_date": "2026-03-31",
-      "gross_wages": 14012.27,
-      "tax": 2407.0,
-      "net_pay": 10148.52,
-      "super": 1456.75,
-      "employee_count": 9,
+      "gross_wages": 11653.31,
+      "tax": 1925.0,
+      "net_pay": 8532.77,
+      "super": 1195.54,
+      "employee_count": 8,
       "employees": [
         {
           "name": "Alex Khaq",
@@ -251,6 +244,13 @@
           "net": 1430.39,
           "tax": 379.0,
           "super": 208.27
+        },
+        {
+          "name": "Andrea Palma",
+          "gross": 1517.96,
+          "net": 1091.79,
+          "tax": 272.0,
+          "super": 154.17
         },
         {
           "name": "Ashleigh Campbell",
@@ -293,29 +293,15 @@
           "net": 689.21,
           "tax": 88.0,
           "super": 90.51
-        },
-        {
-          "name": "Nicole Diamantis",
-          "gross": 1938.46,
-          "net": 1353.77,
-          "tax": 377.0,
-          "super": 207.69
-        },
-        {
-          "name": "Nikolaos Diamantis",
-          "gross": 1938.46,
-          "net": 1353.77,
-          "tax": 377.0,
-          "super": 207.69
         }
       ]
     }
   ],
   "totals": {
-    "gross_wages": 65209.17,
-    "tax": 12658.0,
-    "net_pay": 45875.1,
-    "super": 6676.07,
-    "employee_count": 38
+    "gross_wages": 61547.67,
+    "tax": 11965.0,
+    "net_pay": 43298.9,
+    "super": 6283.77,
+    "employee_count": 36
   }
 }
