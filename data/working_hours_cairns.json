@@ -18,7 +18,7 @@
       "sunday_hrs": 5.0,
       "total_hrs": 40.0
     },
-    "Ashleigh Campbell alexis": {
+    "Ashleigh Campbell": {
       "weekday_hrs": 13.0,
       "saturday_hrs": 9.0,
       "sunday_hrs": 0.0,
@@ -36,19 +36,19 @@
       "sunday_hrs": 5.0,
       "total_hrs": 53.0
     },
+    "Dion Mataele": {
+      "weekday_hrs": 8.0,
+      "saturday_hrs": 0.0,
+      "sunday_hrs": 5.0,
+      "total_hrs": 13.0
+    },
     "Dipen Magar": {
       "weekday_hrs": 7.83,
       "saturday_hrs": 0.0,
       "sunday_hrs": 0.0,
       "total_hrs": 7.83
     },
-    "Di\u2019on Mataele": {
-      "weekday_hrs": 8.0,
-      "saturday_hrs": 0.0,
-      "sunday_hrs": 5.0,
-      "total_hrs": 13.0
-    },
-    "Ethan \ud83c\uddee\ud83c\uddea": {
+    "Ethan Byrne": {
       "weekday_hrs": 34.0,
       "saturday_hrs": 9.0,
       "sunday_hrs": 0.0,
@@ -110,7 +110,7 @@
         },
         {
           "id": "3313059",
-          "name": "Nico Diamantis"
+          "name": "Nikolaos Diamantis"
         }
       ],
       "hours": {
@@ -164,7 +164,7 @@
         },
         {
           "id": "4623420",
-          "name": "Di\u2019on Mataele"
+          "name": "Dion Mataele"
         },
         {
           "id": "3340507",
@@ -176,7 +176,7 @@
         },
         {
           "id": "3313059",
-          "name": "Nico Diamantis"
+          "name": "Nikolaos Diamantis"
         }
       ],
       "hours": {
@@ -234,7 +234,7 @@
         },
         {
           "id": "3340502",
-          "name": "Ethan \ud83c\uddee\ud83c\uddea"
+          "name": "Ethan Byrne"
         },
         {
           "id": "3340509",
@@ -278,7 +278,7 @@
       "employees": [
         {
           "id": "3502930",
-          "name": "Ashleigh Campbell alexis"
+          "name": "Ashleigh Campbell"
         },
         {
           "id": "3495942",

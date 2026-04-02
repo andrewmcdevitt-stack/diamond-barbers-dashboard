@@ -90,7 +90,7 @@
       "sunday_hrs": 0.0,
       "total_hrs": 32.0
     },
-    "Nico Diamantis": {
+    "Nikolaos Diamantis": {
       "weekday_hrs": 12.0,
       "saturday_hrs": 6.83,
       "sunday_hrs": 5.0,
@@ -114,7 +114,7 @@
       "sunday_hrs": 5.0,
       "total_hrs": 40.0
     },
-    "Vince Vincenzo": {
+    "Vincenzo Vanzanella": {
       "weekday_hrs": 28.0,
       "saturday_hrs": 9.5,
       "sunday_hrs": 5.0,
@@ -132,7 +132,7 @@
       "employees": [
         {
           "id": "3328952",
-          "name": "Nico Diamantis"
+          "name": "Nikolaos Diamantis"
         },
         {
           "id": "3328945",
@@ -168,7 +168,7 @@
       "employees": [
         {
           "id": "3328952",
-          "name": "Nico Diamantis"
+          "name": "Nikolaos Diamantis"
         },
         {
           "id": "3328935",
@@ -214,7 +214,7 @@
       "employees": [
         {
           "id": "3328952",
-          "name": "Nico Diamantis"
+          "name": "Nikolaos Diamantis"
         },
         {
           "id": "3328945",
@@ -260,7 +260,7 @@
       "employees": [
         {
           "id": "3328952",
-          "name": "Nico Diamantis"
+          "name": "Nikolaos Diamantis"
         },
         {
           "id": "3328938",
@@ -382,7 +382,7 @@
       "employees": [
         {
           "id": "3328952",
-          "name": "Nico Diamantis"
+          "name": "Nikolaos Diamantis"
         },
         {
           "id": "3328940",
@@ -438,11 +438,11 @@
       "employees": [
         {
           "id": "3328952",
-          "name": "Nico Diamantis"
+          "name": "Nikolaos Diamantis"
         },
         {
           "id": "3328937",
-          "name": "Vince Vincenzo"
+          "name": "Vincenzo Vanzanella"
         },
         {
           "id": "3328942",
