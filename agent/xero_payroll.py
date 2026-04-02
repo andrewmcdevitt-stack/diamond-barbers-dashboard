@@ -154,44 +154,55 @@ def fetch_org_payroll(tenant_id, tenant_name, access_token):
     # Prefer POSTED runs; fall back to any
     posted = [r for r in pay_runs if r.get("PayRunStatus") == "POSTED"] or pay_runs
 
-    # Sort by payment date descending — pick the most recent
     def run_sort_key(r):
         d = parse_xero_date(r.get("PaymentDate") or r.get("PayRunPeriodEndDate", ""))
         from datetime import date
         return d or date.min
 
     posted.sort(key=run_sort_key, reverse=True)
-    latest = posted[0]
+    latest     = posted[0]
     pay_run_id = latest.get("PayRunID")
 
-    # Fetch full detail to get payslip breakdowns
+    # Fetch PayRun detail to get dates and payslip stubs (names, net, tax)
     try:
         detail = xero_get(f"/payroll.xro/1.0/PayRuns/{pay_run_id}", tenant_id, access_token)
-        run = detail.get("PayRuns", [{}])[0]
+        run    = detail.get("PayRuns", [{}])[0]
     except Exception as e:
         print(f"    ERROR fetching PayRun detail: {e}")
         run = latest
 
-    payslips = run.get("Payslips", [])
+    payslip_stubs = run.get("Payslips", [])
+    start_date    = parse_xero_date(run.get("PayRunPeriodStartDate", ""))
+    end_date      = parse_xero_date(run.get("PayRunPeriodEndDate", ""))
+    payment_date  = parse_xero_date(run.get("PaymentDate", ""))
 
-    # Sum totals from individual payslips
-    gross  = sum(float(p.get("GrossPay", 0) or 0) for p in payslips)
-    tax    = sum(float(p.get("TotalTax", 0) or 0) for p in payslips)
-    net    = sum(float(p.get("NetPay", 0) or 0) for p in payslips)
-    super_ = sum(float(p.get("SuperannuationContribution", 0) or 0) for p in payslips)
+    print(f"    Period: {start_date} – {end_date}  |  Payslips: {len(payslip_stubs)}")
 
-    # Fall back to PayRun-level fields if payslip totals are zero
-    if gross == 0:
-        gross  = float(run.get("GrossWages", 0) or 0)
-        tax    = float(run.get("Tax", 0) or 0)
-        net    = float(run.get("NetPay", 0) or 0)
-        super_ = float(run.get("SuperannuationContribution", 0) or 0)
+    # PayRun-level aggregates (the most reliable source)
+    # Xero exposes Tax and NetPay at the run level; GrossWages is not available
+    run_net = float(run.get("NetPay", 0) or 0)
+    run_tax = float(run.get("Tax", 0) or 0)
+    # Derive gross: in most cases Gross = Net + PAYG Tax (no salary sacrifice assumed)
+    run_gross = round(run_net + run_tax, 2)
 
-    start_date   = parse_xero_date(run.get("PayRunPeriodStartDate", ""))
-    end_date     = parse_xero_date(run.get("PayRunPeriodEndDate", ""))
-    payment_date = parse_xero_date(run.get("PaymentDate", ""))
+    # Per-employee net pay from payslip stubs (name + NetPay is reliable)
+    employees = []
+    for stub in payslip_stubs:
+        first = stub.get("FirstName", "")
+        last  = stub.get("LastName", "")
+        name  = f"{first} {last}".strip() or "Unknown"
+        net   = float(stub.get("NetPay", 0) or 0)
+        employees.append({"name": name, "net_pay": round(net, 2)})
 
-    print(f"    Period: {start_date} – {end_date}  |  Gross: ${gross:,.2f}  |  Employees: {len(payslips)}")
+    employees.sort(key=lambda e: e["name"])
+
+    gross_total = run_gross
+    tax_total   = round(run_tax, 2)
+    net_total   = round(run_net, 2)
+    # Super = 11.5% of gross wages (FY2025-26 Super Guarantee rate)
+    super_total = round(run_gross * 0.115, 2)
+
+    print(f"    Gross: ${gross_total:,.2f}  |  Net: ${net_total:,.2f}  |  Tax: ${tax_total:,.2f}  |  Super (est): ${super_total:,.2f}")
 
     return {
         "org":              tenant_name,
@@ -199,11 +210,12 @@ def fetch_org_payroll(tenant_id, tenant_name, access_token):
         "pay_period_start": str(start_date)   if start_date   else "",
         "pay_period_end":   str(end_date)     if end_date     else "",
         "payment_date":     str(payment_date) if payment_date else "",
-        "gross_wages":      round(gross,  2),
-        "tax":              round(tax,    2),
-        "net_pay":          round(net,    2),
-        "super":            round(super_, 2),
-        "employee_count":   len(payslips),
+        "gross_wages":      gross_total,
+        "tax":              tax_total,
+        "net_pay":          net_total,
+        "super":            super_total,
+        "employee_count":   len(employees),
+        "employees":        employees,
     }
 
 
