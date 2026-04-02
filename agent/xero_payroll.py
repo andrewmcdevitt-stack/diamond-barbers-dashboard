@@ -179,30 +179,32 @@ def fetch_org_payroll(tenant_id, tenant_name, access_token):
     print(f"    Period: {start_date} – {end_date}  |  Payslips: {len(payslip_stubs)}")
 
     # PayRun-level aggregates (the most reliable source)
-    # Xero exposes Tax and NetPay at the run level; GrossWages is not available
-    run_net = float(run.get("NetPay", 0) or 0)
-    run_tax = float(run.get("Tax", 0) or 0)
-    # Derive gross: in most cases Gross = Net + PAYG Tax (no salary sacrifice assumed)
-    run_gross = round(run_net + run_tax, 2)
+    run_net   = float(run.get("NetPay", 0) or 0)
+    run_tax   = float(run.get("Tax", 0) or 0)
+    run_gross = run_net + run_tax                      # gross before super
+    run_super = round(run_gross * 0.12, 2)             # 12% SG rate
+    run_total = round(run_gross + run_super, 2)        # total employer cost (net+tax+super)
 
-    # Per-employee net pay from payslip stubs (name + NetPay is reliable)
+    # Per-employee: estimate gross using the location's tax ratio, then add super
+    tax_ratio = (run_tax / run_net) if run_net > 0 else 0
     employees = []
     for stub in payslip_stubs:
-        first = stub.get("FirstName", "")
-        last  = stub.get("LastName", "")
-        name  = f"{first} {last}".strip() or "Unknown"
-        net   = float(stub.get("NetPay", 0) or 0)
-        employees.append({"name": name, "net_pay": round(net, 2)})
+        first    = stub.get("FirstName", "")
+        last     = stub.get("LastName", "")
+        name     = f"{first} {last}".strip() or "Unknown"
+        emp_net  = float(stub.get("NetPay", 0) or 0)
+        emp_gross = emp_net * (1 + tax_ratio)          # estimated gross before super
+        emp_total = round(emp_gross * 1.12, 2)         # total cost incl. 12% super
+        employees.append({"name": name, "gross": emp_total})
 
     employees.sort(key=lambda e: e["name"])
 
-    gross_total = run_gross
-    tax_total   = round(run_tax, 2)
+    gross_total = run_total   # all-in: net + tax + super
+    super_total = run_super
     net_total   = round(run_net, 2)
-    # Super = 11.5% of gross wages (FY2025-26 Super Guarantee rate)
-    super_total = round(run_gross * 0.115, 2)
+    tax_total   = round(run_tax, 2)
 
-    print(f"    Gross: ${gross_total:,.2f}  |  Net: ${net_total:,.2f}  |  Tax: ${tax_total:,.2f}  |  Super (est): ${super_total:,.2f}")
+    print(f"    Total cost (net+tax+super): ${gross_total:,.2f}  |  Employees: {len(employees)}")
 
     return {
         "org":              tenant_name,
