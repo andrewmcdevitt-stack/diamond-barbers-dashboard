@@ -47,6 +47,9 @@ jobs:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: python agent/fetch_hours.py
 
+      - name: Write Xero token from secret
+        run: echo '${{ secrets.XERO_TOKEN_JSON }}' > data/xero_token.json
+
       - name: Generate Xero payroll report
         env:
           XERO_CLIENT_ID: ${{ secrets.XERO_CLIENT_ID }}
@@ -54,6 +57,13 @@ jobs:
           EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: python agent/xero_payroll_report.py
+
+      - name: Save updated Xero token back to secret
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          TOKEN_JSON=$(cat data/xero_token.json)
+          gh secret set XERO_TOKEN_JSON --body "$TOKEN_JSON" --repo ${{ github.repository }}
 
       - name: Commit and push updated data
         run: |
