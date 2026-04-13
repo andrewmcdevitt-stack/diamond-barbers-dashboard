@@ -3,11 +3,11 @@
     "period_start": "2026-04-06",
     "period_end": "2026-04-12",
     "sales_summary": {
-      "services": 51847.4,
-      "products": 3940.92,
+      "services": 52858.24,
+      "products": 3946.59,
       "tips": 1556.0,
-      "total_sales": 55788.32,
-      "total_sales_and_other": 57344.32,
+      "total_sales": 56804.83,
+      "total_sales_and_other": 58360.83,
       "late_cancellation_fees": 0,
       "no_show_fees": 0,
       "service_addons": 0
@@ -220,6 +220,16 @@
         "occupancy_pct": 43.8272
       },
       {
+        "name": "Nico Diamantis",
+        "services": 1010.84,
+        "products": 5.67,
+        "tips": 0,
+        "total_sales": 1016.51,
+        "total_appts": 0,
+        "cancelled_appts": 0,
+        "occupancy_pct": 82.069
+      },
+      {
         "name": "Nikolaos Diamantis",
         "services": 1010.84,
         "products": 5.67,
@@ -228,16 +238,6 @@
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 79.6875
-      },
-      {
-        "name": "Nico Diamantis",
-        "services": 0,
-        "products": 0,
-        "tips": 0,
-        "total_sales": 0,
-        "total_appts": 0,
-        "cancelled_appts": 0,
-        "occupancy_pct": 0
       }
     ],
     "locations": []
