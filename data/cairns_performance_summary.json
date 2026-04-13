@@ -4,10 +4,10 @@
     "period_end": "2026-04-12",
     "sales_summary": {
       "services": 29207.08,
-      "products": 903.96,
+      "products": 852.12,
       "tips": 490.22,
-      "total_sales": 30111.04,
-      "total_sales_and_other": 30601.26,
+      "total_sales": 30059.2,
+      "total_sales_and_other": 30549.42,
       "late_cancellation_fees": 0,
       "no_show_fees": 0,
       "service_addons": 0
@@ -72,9 +72,9 @@
       {
         "name": "Brazil Lamsen",
         "services": 2569.32,
-        "products": 51.84,
+        "products": 0,
         "tips": 18.75,
-        "total_sales": 2639.91,
+        "total_sales": 2588.07,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 52.9514
@@ -164,8 +164,8 @@
       {
         "name": "Diamond Barbers Wulguru",
         "services": 2905.47,
-        "products": 57.6,
-        "total_sales": 2963.07,
+        "products": 51.84,
+        "total_sales": 2957.31,
         "occupancy_pct": 50.5848
       },
       {
