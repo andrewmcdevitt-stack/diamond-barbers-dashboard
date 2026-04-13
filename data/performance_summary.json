@@ -4,10 +4,10 @@
     "period_end": "2026-04-12",
     "sales_summary": {
       "services": 51847.4,
-      "products": 2075.85,
+      "products": 1868.22,
       "tips": 1556.0,
-      "total_sales": 53923.25,
-      "total_sales_and_other": 55479.25,
+      "total_sales": 53715.62,
+      "total_sales_and_other": 55271.62,
       "late_cancellation_fees": 0,
       "no_show_fees": 0,
       "service_addons": 0
@@ -22,9 +22,9 @@
       {
         "name": "Anthony Crispo",
         "services": 4266.45,
-        "products": 84.87,
+        "products": 76.41,
         "tips": 185.04,
-        "total_sales": 4536.36,
+        "total_sales": 4527.9,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 85.3135
@@ -32,9 +32,9 @@
       {
         "name": "Avinash Borade",
         "services": 3281.62,
-        "products": 196.2,
+        "products": 176.58,
         "tips": 40.65,
-        "total_sales": 3518.47,
+        "total_sales": 3498.85,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 73.5955
@@ -42,9 +42,9 @@
       {
         "name": "Abuel Basallo",
         "services": 3312.68,
-        "products": 34.2,
+        "products": 30.78,
         "tips": 133.53,
-        "total_sales": 3480.41,
+        "total_sales": 3476.99,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 79.5635
@@ -52,32 +52,32 @@
       {
         "name": "Robert Jugan",
         "services": 3300.3,
-        "products": 147.87,
+        "products": 133.11,
         "tips": 0,
-        "total_sales": 3448.17,
+        "total_sales": 3433.41,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 78.4553
       },
       {
-        "name": "Airol Basallo",
-        "services": 3040.43,
-        "products": 282.6,
-        "tips": 106.25,
-        "total_sales": 3429.28,
-        "total_appts": 0,
-        "cancelled_appts": 0,
-        "occupancy_pct": 76.4228
-      },
-      {
         "name": "Wilfred Vidal",
         "services": 3139.65,
-        "products": 64.8,
+        "products": 58.32,
         "tips": 206.25,
-        "total_sales": 3410.7,
+        "total_sales": 3404.22,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 71.1504
+      },
+      {
+        "name": "Airol Basallo",
+        "services": 3040.43,
+        "products": 254.34,
+        "tips": 106.25,
+        "total_sales": 3401.02,
+        "total_appts": 0,
+        "cancelled_appts": 0,
+        "occupancy_pct": 76.4228
       },
       {
         "name": "Jack Matthew",
@@ -92,9 +92,9 @@
       {
         "name": "Jairo Espinosa",
         "services": 2847.83,
-        "products": 122.4,
+        "products": 110.16,
         "tips": 66.88,
-        "total_sales": 3037.11,
+        "total_sales": 3024.87,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 63.9604
@@ -102,9 +102,9 @@
       {
         "name": "Vincenzo Vanzanella",
         "services": 2754.0,
-        "products": 234.54,
+        "products": 211.05,
         "tips": 7.2,
-        "total_sales": 2995.74,
+        "total_sales": 2972.25,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 86.3636
@@ -112,9 +112,9 @@
       {
         "name": "Sean Maguire",
         "services": 2731.95,
-        "products": 153.0,
+        "products": 137.7,
         "tips": 22.25,
-        "total_sales": 2907.2,
+        "total_sales": 2891.9,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 67.6829
@@ -122,9 +122,9 @@
       {
         "name": "Luca Marzocchi",
         "services": 2646.9,
-        "products": 190.8,
+        "products": 171.72,
         "tips": 0,
-        "total_sales": 2837.7,
+        "total_sales": 2818.62,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 72.155
@@ -132,9 +132,9 @@
       {
         "name": "Liem Nguyen",
         "services": 2624.85,
-        "products": 61.2,
+        "products": 55.08,
         "tips": 112.95,
-        "total_sales": 2799.0,
+        "total_sales": 2792.88,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 73.7374
@@ -142,9 +142,9 @@
       {
         "name": "JoJo Aligam",
         "services": 2323.12,
-        "products": 30.6,
+        "products": 27.54,
         "tips": 93.04,
-        "total_sales": 2446.76,
+        "total_sales": 2443.7,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 63.9738
@@ -162,9 +162,9 @@
       {
         "name": "Tam Nguyen",
         "services": 2040.39,
-        "products": 30.6,
+        "products": 27.54,
         "tips": 60.75,
-        "total_sales": 2131.74,
+        "total_sales": 2128.68,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 55.5556
@@ -172,9 +172,9 @@
       {
         "name": "Krish Manocha",
         "services": 1972.31,
-        "products": 30.6,
+        "products": 27.54,
         "tips": 16.2,
-        "total_sales": 2019.11,
+        "total_sales": 2016.05,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 57.2072
@@ -182,39 +182,39 @@
       {
         "name": "Jamaine McGee",
         "services": 1583.1,
-        "products": 61.2,
+        "products": 55.08,
         "tips": 177.55,
-        "total_sales": 1821.85,
+        "total_sales": 1815.73,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 46.9907
       },
       {
-        "name": "Marianne Escobar",
-        "services": 1141.65,
-        "products": 236.07,
-        "tips": 59.9,
-        "total_sales": 1437.62,
-        "total_appts": 0,
-        "cancelled_appts": 0,
-        "occupancy_pct": 53.5714
-      },
-      {
         "name": "John Zagorianos",
         "services": 1202.4,
-        "products": 77.4,
+        "products": 69.66,
         "tips": 155.03,
-        "total_sales": 1434.83,
+        "total_sales": 1427.09,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 56.5972
       },
       {
+        "name": "Marianne Escobar",
+        "services": 1141.65,
+        "products": 212.4,
+        "tips": 59.9,
+        "total_sales": 1413.95,
+        "total_appts": 0,
+        "cancelled_appts": 0,
+        "occupancy_pct": 53.5714
+      },
+      {
         "name": "Ahmet Koysu",
         "services": 1147.5,
-        "products": 30.6,
+        "products": 27.54,
         "tips": 8.0,
-        "total_sales": 1186.1,
+        "total_sales": 1183.04,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 43.8272
@@ -222,280 +222,24 @@
       {
         "name": "Nikolaos Diamantis",
         "services": 1010.84,
-        "products": 6.3,
+        "products": 5.67,
         "tips": 0,
-        "total_sales": 1017.14,
+        "total_sales": 1016.51,
         "total_appts": 0,
         "cancelled_appts": 0,
-        "occupancy_pct": 82.069
+        "occupancy_pct": 79.6875
+      },
+      {
+        "name": "Nico Diamantis",
+        "services": 0,
+        "products": 0,
+        "tips": 0,
+        "total_sales": 0,
+        "total_appts": 0,
+        "cancelled_appts": 0,
+        "occupancy_pct": 0
       }
     ],
     "locations": []
-  },
-  {
-    "period_start": "2026-04-06",
-    "period_end": "2026-04-12",
-    "sales_summary": {
-      "services": 57608.21,
-      "products": 2306.3,
-      "tips": 1556.0,
-      "total_sales": 60298.52
-    },
-    "staff": [
-      {
-        "name": "Abuel Basallo",
-        "services": 3680.75,
-        "products": 38.0,
-        "tips": 133.53,
-        "total_sales": 3736.25,
-        "total_appts": 73,
-        "cancelled_appts": 5,
-        "no_show_appts": 0,
-        "services_sold": 96,
-        "occupancy_pct": 79.56
-      },
-      {
-        "name": "Ahmet Koysu",
-        "services": 1275.0,
-        "products": 34.0,
-        "tips": 8.0,
-        "total_sales": 1309.0,
-        "total_appts": 31,
-        "cancelled_appts": 2,
-        "no_show_appts": 1,
-        "services_sold": 32,
-        "occupancy_pct": 43.83
-      },
-      {
-        "name": "Airol Basallo",
-        "services": 3378.25,
-        "products": 314.0,
-        "tips": 106.25,
-        "total_sales": 3699.75,
-        "total_appts": 72,
-        "cancelled_appts": 3,
-        "no_show_appts": 1,
-        "services_sold": 89,
-        "occupancy_pct": 76.42
-      },
-      {
-        "name": "Anthony Crispo",
-        "services": 4740.5,
-        "products": 94.3,
-        "tips": 185.04,
-        "total_sales": 4844.8,
-        "total_appts": 102,
-        "cancelled_appts": 0,
-        "no_show_appts": 0,
-        "services_sold": 124,
-        "occupancy_pct": 85.31
-      },
-      {
-        "name": "Avinash Borade",
-        "services": 3646.25,
-        "products": 217.95,
-        "tips": 40.65,
-        "total_sales": 3898.58,
-        "total_appts": 90,
-        "cancelled_appts": 8,
-        "no_show_appts": 2,
-        "services_sold": 96,
-        "occupancy_pct": 73.6
-      },
-      {
-        "name": "David Garcia",
-        "services": 2619.5,
-        "products": 0.0,
-        "tips": 56.7,
-        "total_sales": 2629.5,
-        "total_appts": 61,
-        "cancelled_appts": 3,
-        "no_show_appts": 1,
-        "services_sold": 64,
-        "occupancy_pct": 67.11
-      },
-      {
-        "name": "Jack Matthew",
-        "services": 3468.75,
-        "products": 0.0,
-        "tips": 47.83,
-        "total_sales": 3538.75,
-        "total_appts": 86,
-        "cancelled_appts": 2,
-        "no_show_appts": 0,
-        "services_sold": 89,
-        "occupancy_pct": 83.13
-      },
-      {
-        "name": "Jairo Espinosa",
-        "services": 3164.25,
-        "products": 136.0,
-        "tips": 66.88,
-        "total_sales": 3310.25,
-        "total_appts": 67,
-        "cancelled_appts": 1,
-        "no_show_appts": 1,
-        "services_sold": 76,
-        "occupancy_pct": 63.96
-      },
-      {
-        "name": "Jamaine McGee",
-        "services": 1759.0,
-        "products": 68.0,
-        "tips": 177.55,
-        "total_sales": 1827.0,
-        "total_appts": 39,
-        "cancelled_appts": 4,
-        "no_show_appts": 0,
-        "services_sold": 46,
-        "occupancy_pct": 46.99
-      },
-      {
-        "name": "JoJo Aligam",
-        "services": 2581.25,
-        "products": 34.0,
-        "tips": 93.04,
-        "total_sales": 2681.75,
-        "total_appts": 57,
-        "cancelled_appts": 1,
-        "no_show_appts": 3,
-        "services_sold": 70,
-        "occupancy_pct": 63.97
-      },
-      {
-        "name": "John Zagorianos",
-        "services": 1336.0,
-        "products": 86.0,
-        "tips": 155.03,
-        "total_sales": 1432.0,
-        "total_appts": 32,
-        "cancelled_appts": 5,
-        "no_show_appts": 0,
-        "services_sold": 33,
-        "occupancy_pct": 56.6
-      },
-      {
-        "name": "Krish Manocha",
-        "services": 2191.46,
-        "products": 34.0,
-        "tips": 16.2,
-        "total_sales": 2225.46,
-        "total_appts": 53,
-        "cancelled_appts": 1,
-        "no_show_appts": 0,
-        "services_sold": 60,
-        "occupancy_pct": 57.21
-      },
-      {
-        "name": "Liem Nguyen",
-        "services": 2916.5,
-        "products": 68.0,
-        "tips": 112.95,
-        "total_sales": 2996.38,
-        "total_appts": 67,
-        "cancelled_appts": 2,
-        "no_show_appts": 4,
-        "services_sold": 80,
-        "occupancy_pct": 73.74
-      },
-      {
-        "name": "Luca Marzocchi",
-        "services": 2941.0,
-        "products": 211.95,
-        "tips": 0.0,
-        "total_sales": 3152.95,
-        "total_appts": 74,
-        "cancelled_appts": 7,
-        "no_show_appts": 1,
-        "services_sold": 80,
-        "occupancy_pct": 72.16
-      },
-      {
-        "name": "Marianne Escobar",
-        "services": 1268.5,
-        "products": 262.25,
-        "tips": 59.9,
-        "total_sales": 1540.75,
-        "total_appts": 32,
-        "cancelled_appts": 9,
-        "no_show_appts": 0,
-        "services_sold": 31,
-        "occupancy_pct": 53.57
-      },
-      {
-        "name": "Nikolaos Diamantis",
-        "services": 1123.15,
-        "products": 6.95,
-        "tips": 0.0,
-        "total_sales": 1145.1,
-        "total_appts": 23,
-        "cancelled_appts": 1,
-        "no_show_appts": 0,
-        "services_sold": 34,
-        "occupancy_pct": 79.69
-      },
-      {
-        "name": "Robert Jugan",
-        "services": 3667.0,
-        "products": 164.3,
-        "tips": 0.0,
-        "total_sales": 3841.3,
-        "total_appts": 81,
-        "cancelled_appts": 4,
-        "no_show_appts": 5,
-        "services_sold": 95,
-        "occupancy_pct": 78.46
-      },
-      {
-        "name": "Sean Maguire",
-        "services": 3035.5,
-        "products": 170.0,
-        "tips": 22.25,
-        "total_sales": 3205.5,
-        "total_appts": 77,
-        "cancelled_appts": 3,
-        "no_show_appts": 0,
-        "services_sold": 90,
-        "occupancy_pct": 67.68
-      },
-      {
-        "name": "Tam Nguyen",
-        "services": 2267.1,
-        "products": 34.0,
-        "tips": 60.75,
-        "total_sales": 2324.85,
-        "total_appts": 47,
-        "cancelled_appts": 0,
-        "no_show_appts": 1,
-        "services_sold": 57,
-        "occupancy_pct": 55.56
-      },
-      {
-        "name": "Vincenzo Vanzanella",
-        "services": 3060.0,
-        "products": 260.6,
-        "tips": 7.2,
-        "total_sales": 3370.6,
-        "total_appts": 66,
-        "cancelled_appts": 4,
-        "no_show_appts": 1,
-        "services_sold": 83,
-        "occupancy_pct": 86.36
-      },
-      {
-        "name": "Wilfred Vidal",
-        "services": 3488.5,
-        "products": 72.0,
-        "tips": 206.25,
-        "total_sales": 3588.0,
-        "total_appts": 79,
-        "cancelled_appts": 3,
-        "no_show_appts": 0,
-        "services_sold": 93,
-        "occupancy_pct": 71.15
-      }
-    ],
-    "report_date": "2026-04-12",
-    "report_type": "performance_summary"
   }
 ]
