@@ -4,10 +4,10 @@
     "period_end": "2026-04-12",
     "sales_summary": {
       "services": 29207.08,
-      "products": 505.44,
+      "products": 852.12,
       "tips": 490.22,
-      "total_sales": 29712.52,
-      "total_sales_and_other": 30202.74,
+      "total_sales": 30059.2,
+      "total_sales_and_other": 30549.42,
       "late_cancellation_fees": 0,
       "no_show_fees": 0,
       "service_addons": 0
@@ -20,6 +20,16 @@
     },
     "staff": [
       {
+        "name": "Jerry Guevarra",
+        "services": 3635.55,
+        "products": 398.52,
+        "tips": 96.5,
+        "total_sales": 4130.57,
+        "total_appts": 0,
+        "cancelled_appts": 0,
+        "occupancy_pct": 80.4702
+      },
+      {
         "name": "Nelson Diwa",
         "services": 4035.6,
         "products": 27.54,
@@ -30,21 +40,11 @@
         "occupancy_pct": 91.0256
       },
       {
-        "name": "Jerry Guevarra",
-        "services": 3635.55,
-        "products": 55.08,
-        "tips": 96.5,
-        "total_sales": 3787.13,
-        "total_appts": 0,
-        "cancelled_appts": 0,
-        "occupancy_pct": 80.4702
-      },
-      {
         "name": "Alfon Amora",
         "services": 3589.65,
-        "products": 0,
+        "products": 55.08,
         "tips": 23.75,
-        "total_sales": 3613.4,
+        "total_sales": 3668.48,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 79.529
@@ -67,14 +67,14 @@
         "total_sales": 2802.36,
         "total_appts": 0,
         "cancelled_appts": 0,
-        "occupancy_pct": 70.3
+        "occupancy_pct": 70.2991
       },
       {
         "name": "Brazil Lamsen",
         "services": 2569.32,
-        "products": 51.84,
+        "products": 0,
         "tips": 18.75,
-        "total_sales": 2639.91,
+        "total_sales": 2588.07,
         "total_appts": 0,
         "cancelled_appts": 0,
         "occupancy_pct": 52.9514
@@ -171,8 +171,8 @@
       {
         "name": "Diamond Barbers Showgrounds",
         "services": 9277.47,
-        "products": 284.4,
-        "total_sales": 9561.87,
+        "products": 255.96,
+        "total_sales": 9533.43,
         "occupancy_pct": 68.2708
       },
       {
